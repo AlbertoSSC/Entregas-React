@@ -1,4 +1,153 @@
-$red-color: brown;
-.red-background {
-    color: $red-color;
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.layout-center {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  margin-top: 2rem;
+}
+
+.layout-app-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+  justify-items: center;
+}
+
+.layout-app-header {
+  color: white;
+  background-color: #007661;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 5px;
+}
+
+.layout-app-nav {
+  display: flex;
+  width: 300px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#search-bar-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+
+.member-list-container {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+.avatar-header {
+  background-color: #1565c0;
+  color: white;
+  font-weight: 500;
+  padding: 4px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.name-header {
+  background-color: #1565c0;
+  color: white;
+  font-weight: 500;
+  padding: 4px;
+}
+.id-header {
+  background-color: #1565c0;
+  color: white;
+  font-weight: 500;
+  padding: 4px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.organization-list-name {
+  display: flex;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #1565c0;
+  font-style: italic;
+}
+
+.member-count {
+  display: flex;
+  justify-content: center;
+}
+.header-list {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: 80px minmax(100px, min-content) minmax(100px, auto);
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  width: 325px;
+  
+  & img {
+    width: 60px;
+    border-radius: 2px;
+  }
+  & span {
+    padding-left: 0.5rem;
+    overflow: "hidden";
+    text-overflow: "ellipsis";
+  }
+}
+
+.not-found-text {
+  color: red;
+  margin: 0;
+  padding: 0;
+}
+
+.member-detail-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 8px 8px 8px;
+  padding: 0 8px 8px 8px;
+
+  & span {
+    margin: 0 4px 0 4px;
+    overflow-wrap: anywhere;
+  }
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #90caf9;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.section-button-container {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+  margin: 24px;
+}
+
+.char-detail-span-orig-loc {
+  color: rgb(171, 171, 171);
+  font-size: small;
+  padding-top: 6px;
 }

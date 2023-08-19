@@ -10,4 +10,9 @@ export default defineConfig({
       plugins: [typescript({ noEmitOnError: true })],
     },
   },
+  resolve: {
+    alias: {
+      "@/": '/src/',
+    },
+  },
 });
