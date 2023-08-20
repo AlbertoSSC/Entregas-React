@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const RmSearchBar: React.FC<Props> = (props) => {
-const { handleGetRMSearchInput, handleRMSearchSubmit, currentSearch} = props;
+  const { handleGetRMSearchInput, handleRMSearchSubmit, currentSearch } = props;
 
   const handleOnSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -37,8 +37,8 @@ const { handleGetRMSearchInput, handleRMSearchSubmit, currentSearch} = props;
           Buscar
         </Button>
       </form>
-      <p className="not-found-text" id="not-found-text">
-        {" "}
+      <p className="not-found-text hidden" id="not-found-text">
+        No se ha encontrado su búsqueda
       </p>
     </>
   );

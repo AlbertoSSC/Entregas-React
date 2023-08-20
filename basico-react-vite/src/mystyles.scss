@@ -100,7 +100,7 @@ body {
   margin-bottom: 16px;
   border-radius: 8px;
   width: 325px;
-  
+
   & img {
     width: 60px;
     border-radius: 2px;
@@ -116,6 +116,9 @@ body {
   color: red;
   margin: 0;
   padding: 0;
+}
+.hidden {
+  display: none;
 }
 
 .member-detail-container {

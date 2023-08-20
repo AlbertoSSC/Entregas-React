@@ -4,30 +4,43 @@ import { Pagination } from "@mui/material";
 
 import { RmSearchBar, ToggleSection, ApiPageNav } from "@/pods";
 import { RmListComponent } from "./RM-List.component";
-import { getCharacterList } from "./api";
+import { fetchForApiTotalPages, getCharacterList } from "./api";
 
 export const RmListContainer: React.FC = () => {
   const [currentSearch, setCurrentSearch] = React.useState("");
-
-  const [characterList, setCharacterList] = React.useState([]);
-
-  const charactersPerPage = 5;
-  const totalPages = Math.ceil(characterList.length / charactersPerPage);
-  const [page, setPage] = React.useState(1);
-  const [characterListSliced, setCharacterListSliced] = React.useState([]);
-  const [apiPage, setApiPage] = React.useState(1);
-  const [alignment, setAlignment] = React.useState("character");
   const [renderSearch, setRenderSearch] = React.useState("");
 
+  const [characterList, setCharacterList] = React.useState([]);
+  const [characterListSliced, setCharacterListSliced] = React.useState([]);
+
+  const charactersPerPage = 5;
+  const [page, setPage] = React.useState(1);
+  const [totalPages, setTotalPages] = React.useState(0);
+  const [alignment, setAlignment] = React.useState("character");
+
+  const notInputText = document.getElementById("not-found-text");
+
   React.useEffect(() => {
-    getCharacterList(apiPage).then((data) => {
-      if (data.length === 0) {
-        setCharacterList([]);
-      } else {
-        setCharacterList(data);
+    const calculateTotalPages = Math.ceil(characterList.length / charactersPerPage);
+    setTotalPages(calculateTotalPages);
+  }, [characterList]);
+
+  React.useEffect(() => {
+    const fetchCharList = async () => {
+      let fetchedCharList = [];
+      const apiTotalPages = await fetchForApiTotalPages(alignment);
+      for (let i = 1; i <= apiTotalPages; i++) {
+        const response = await getCharacterList(i);
+
+        fetchedCharList.push(...response);
       }
-    });
-  }, [apiPage]);
+      if (fetchedCharList.length === 0) {
+        setCharacterList([]);
+      }
+      setCharacterList(fetchedCharList);
+    };
+    fetchCharList();
+  }, []);
 
   React.useEffect(() => {
     const characterPageSlice = characterList.slice(
@@ -38,22 +51,49 @@ export const RmListContainer: React.FC = () => {
   }, [characterList, page]);
 
   React.useEffect(() => {
-    const notInputText = document.getElementById("not-found-text");
-
     const fetchAndMatch = async () => {
+      if (renderSearch === "") {
+        setCharacterList([]);
+        return;
+      }
+
       let characterMatch = [];
-      for (let i = 1; i <= totalPages; i++) {
+      const apiTotalPages = await fetchForApiTotalPages(alignment);
+
+      for (let i = 1; i <= apiTotalPages; i++) {
         const response = await getCharacterList(i);
-        if (response === null) break;
-        const matchingChars = response.filter((char) => Object.values(char).includes(renderSearch));
-        
+
+        const responseWithLowercaseValues = response.map((char) => {
+          const charWithLowercaseValues = {};
+          for (const [key, value] of Object.entries(char)) {
+            if (typeof value === "string") {
+              charWithLowercaseValues[key] = value.toLowerCase();
+            } else {
+              charWithLowercaseValues[key] = value;
+            }
+          }
+          return charWithLowercaseValues;
+        });
+
+        const matchingChars = responseWithLowercaseValues.filter((char) =>
+          Object.values(char).some(
+            (value) => typeof value === "string" && value.includes(renderSearch.toLowerCase())
+          )
+        );
+
         characterMatch.push(...matchingChars);
       }
-      if (characterMatch.length !== 0) setCharacterList(characterMatch);
-      notInputText.innerText = "No hemos encontrado ningún resultado para tu búsqueda.";
+
+      if (characterMatch.length !== 0) {
+        setCharacterList(characterMatch);
+        notInputText.classList.add("hidden");
+      } else {
+        notInputText.classList.remove("hidden");
+      }
     };
+
     fetchAndMatch();
-  }, [renderSearch, totalPages]);
+  }, [renderSearch]);
 
   const handleGetSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCurrentSearch(event.target.value);
@@ -68,16 +108,6 @@ export const RmListContainer: React.FC = () => {
   const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page);
     window.scrollTo(0, 0);
-  };
-
-  const handleNextApiPage = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setApiPage(apiPage + 1);
-    setPage(1);
-    console.log(apiPage);
-  };
-  const handlePrevApiPage = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setApiPage(apiPage - 1);
-    console.log(apiPage);
   };
 
   const handleToogleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
@@ -104,13 +134,6 @@ export const RmListContainer: React.FC = () => {
           justifyContent: "center",
           margin: "1rem",
         }}
-      />
-      <ApiPageNav
-        alignment={alignment}
-        totalPages={totalPages}
-        apiPage={apiPage}
-        handleNextApiPage={handleNextApiPage}
-        handlePrevApiPage={handlePrevApiPage}
       />
     </>
   );

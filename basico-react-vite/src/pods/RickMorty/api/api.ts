@@ -1,12 +1,19 @@
 import * as apiModel from "./api.model";
 
+export const fetchForApiTotalPages = async (alignment: string) => {
+  const response = await fetch(`https://rickandmortyapi.com/api/${alignment}`);
+  const data = await response.json();
+
+  return data.info.pages;
+};
+
 //Lists
 
 export const getCharacterList = async (apiPage: number): Promise<apiModel.CharacterEntity[]> => {
   const response = await fetch(`https://rickandmortyapi.com/api/character?page=${apiPage}`);
   const data = await response.json();
-  if (response.status === 404) {
-    console.log("404");
+  if (!response.ok) {
+    console.log("API response no OK");
     return null;
   }
   const results = data.results;
@@ -33,7 +40,7 @@ export const getEpisodeList = async (): Promise<apiModel.EpisodeEntity[]> => {
   return results;
 };
 
-//singles
+//Singles
 
 export const getCharacter = async (id: string): Promise<apiModel.CharacterEntity> => {
   const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
