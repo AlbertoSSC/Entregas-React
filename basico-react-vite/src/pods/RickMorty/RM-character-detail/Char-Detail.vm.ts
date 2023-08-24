@@ -1,4 +1,4 @@
-interface CharDetailVM {
+export interface CharDetailVM {
   id: number;
   name: string;
   status: string;

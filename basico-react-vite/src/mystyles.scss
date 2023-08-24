@@ -55,7 +55,7 @@ body {
   flex-direction: column;
   width: max-content;
 }
-.avatar-header {
+.grid-column-1-header {
   background-color: #1565c0;
   color: white;
   font-weight: 500;
@@ -63,13 +63,13 @@ body {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-.name-header {
+.grid-column-2-header {
   background-color: #1565c0;
   color: white;
   font-weight: 500;
   padding: 4px;
 }
-.id-header {
+.grid-column-3-header {
   background-color: #1565c0;
   color: white;
   font-weight: 500;
@@ -94,7 +94,7 @@ body {
 .header-list {
   display: grid;
   gap: 1px;
-  grid-template-columns: 80px minmax(100px, min-content) minmax(100px, auto);
+  grid-template-columns: minmax(80px, 100px) minmax(100px, min-content) minmax(100px, auto);
   align-items: center;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -107,8 +107,8 @@ body {
   }
   & span {
     padding-left: 0.5rem;
-    overflow: "hidden";
-    text-overflow: "ellipsis";
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -153,4 +153,14 @@ body {
   color: rgb(171, 171, 171);
   font-size: small;
   padding-top: 6px;
+}
+
+.resident-list-container{
+  display: grid;
+  grid-template-columns: 60px min-content;
+  margin: 0.2rem;
+}
+
+.span-loc-name{
+  font-weight: 500;
 }

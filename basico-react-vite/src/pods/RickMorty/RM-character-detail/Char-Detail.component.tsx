@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Avatar, Button, Divider, ListItemButton } from "@mui/material";
 
 import { routes } from "@/core";
+import { CharDetailVM } from "@/pods";
 
 interface Props {
   charDetailVM: CharDetailVM;
@@ -11,6 +12,12 @@ interface Props {
 
 export const CharDetailComponent: React.FC<Props> = (props) => {
   const { charDetailVM } = props;
+
+  const urlLocationSplit = charDetailVM.location.url.split("/");
+  const urlLocationId = urlLocationSplit[urlLocationSplit.length - 1];
+
+  const urlOriginSplit = charDetailVM.origin.url.split("/");
+  const urlOriginId = urlOriginSplit[urlOriginSplit.length - 1];
 
   return (
     <div className="detail-container">
@@ -37,7 +44,8 @@ export const CharDetailComponent: React.FC<Props> = (props) => {
             width: "100%",
             justifyContent: "center",
           }}
-          href={charDetailVM.origin.url}
+          disabled={charDetailVM.origin.name === "unknown" && true}
+          href={routes.rm_loc_detail(urlOriginId)}
         >
           {charDetailVM.origin.name}
         </ListItemButton>
@@ -53,7 +61,7 @@ export const CharDetailComponent: React.FC<Props> = (props) => {
             width: "100%",
             justifyContent: "center",
           }}
-          href={charDetailVM.location.url}
+          href={routes.rm_loc_detail(urlLocationId)}
         >
           {charDetailVM.location.name}
         </ListItemButton>

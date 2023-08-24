@@ -1,8 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import { CharDetailComponent } from "./Char-Detail.component";
-import { getCharacter } from "../api";
+import { CharDetailComponent, CharDetailVM, getCharacter } from "@/pods";
 
 export const CharDetailContainer = () => {
   const { id } = useParams<{ id: string }>();
@@ -13,13 +12,5 @@ export const CharDetailContainer = () => {
     getCharacter(id).then(setCharDetail);
   }, [id]);
 
-  if (!charDetail) {
-    return <h3>Cargando...</h3>;
-  }
-
-  return (
-    <>
-      <CharDetailComponent charDetailVM={charDetail} />
-    </>
-  );
+  return !charDetail ? <h4>Cargando...</h4> : <CharDetailComponent charDetailVM={charDetail} />;
 };

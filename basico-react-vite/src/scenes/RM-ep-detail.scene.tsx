@@ -1,13 +1,13 @@
 import React from "react";
 
-import { CharDetailContainer } from "@/pods";
+import { EpisodeDetailContainer } from "@/pods";
 import { AppLayout, CenteredLayout } from "@/layout";
 
-export const RmDetailCharacterScene: React.FC = () => {
+export const RmDetailEpisodeScene: React.FC = () => {
   return (
     <CenteredLayout>
       <AppLayout>
-        <CharDetailContainer />
+        <EpisodeDetailContainer />
       </AppLayout>
     </CenteredLayout>
   );

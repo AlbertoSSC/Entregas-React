@@ -1,18 +1,13 @@
 import React from "react";
 
-import { CharComponent } from "./Char.component";
-import { CharacterVM } from "./Char.vm";
+import { CharacterVM, CharComponent } from "@/pods";
 
 export const CharContainer: React.FC<{ characterListSliced: CharacterVM[] }> = (props) => {
   const { characterListSliced } = props;
 
-  return (
-    <>
-      {!characterListSliced ? (
-        <p>Loading...</p>
-      ) : (
-        <CharComponent characterListSliced={characterListSliced} />
-      )}
-    </>
+  return !characterListSliced ? (
+    <h4>Loading...</h4>
+  ) : (
+    <CharComponent characterListSliced={characterListSliced} />
   );
 };

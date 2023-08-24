@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Button, TextField } from "@mui/material";
 
 interface Props {
@@ -26,6 +27,7 @@ export const RmSearchBar: React.FC<Props> = (props) => {
     <>
       <form id="search-bar-form" onSubmit={handleOnSubmit}>
         <TextField
+          id="search-text-field"
           sx={{ marginRight: "5px" }}
           variant="outlined"
           type="text"

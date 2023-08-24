@@ -3,9 +3,8 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Avatar, Divider, Link } from "@mui/material";
 
-import { CharHeaderList } from "./Char-Header-List";
-import { CharacterVM } from "./Char.vm";
 import { routes } from "@/core";
+import { CharHeaderList, CharacterVM } from "@/pods";
 
 interface Props {
   characterListSliced: CharacterVM[];
@@ -23,7 +22,11 @@ export const CharComponent: React.FC<Props> = (props) => {
           <Link
             component={RouterLink}
             to={routes.rm_char_detail(char.id.toString())}
-            sx={{ borderRadius:"8px", textDecoration: "none", "&:hover": {backgroundColor:"#e3f2fd"}}}
+            sx={{
+              borderRadius: "8px",
+              textDecoration: "none",
+              "&:hover": { backgroundColor: "#e3f2fd" },
+            }}
           >
             <div className="header-list detail-link">
               <Avatar

@@ -20,8 +20,8 @@ export const getCharacterList = async (apiPage: number): Promise<apiModel.Charac
   return results;
 };
 
-export const getLocationList = async (): Promise<apiModel.LocationEntity[]> => {
-  const response = await fetch("https://rickandmortyapi.com/api/location");
+export const getLocationList = async (apiPage: number): Promise<apiModel.LocationEntity[]> => {
+  const response = await fetch(`https://rickandmortyapi.com/api/location?page=${apiPage}`);
   const data = await response.json();
   if (response.status === 404) {
     return null;
@@ -30,8 +30,8 @@ export const getLocationList = async (): Promise<apiModel.LocationEntity[]> => {
   return results;
 };
 
-export const getEpisodeList = async (): Promise<apiModel.EpisodeEntity[]> => {
-  const response = await fetch("https://rickandmortyapi.com/api/episode");
+export const getEpisodeList = async (apiPage: number): Promise<apiModel.EpisodeEntity[]> => {
+  const response = await fetch(`https://rickandmortyapi.com/api/episode?page=${apiPage}`);
   const data = await response.json();
   if (response.status === 404) {
     return null;

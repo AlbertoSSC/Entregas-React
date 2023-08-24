@@ -1,22 +1,30 @@
 import React from "react";
 
-import { CharContainer } from "./RM-character-list";
-import { CharacterVM } from "./RM-character-list/Char.vm";
+import {
+  CharacterVM,
+  CharContainer,
+  EpisodeContainer,
+  EpisodeVM,
+  LocationContainer,
+  LocationVM,
+} from "@/pods";
 
 interface Props {
   characterListSliced: CharacterVM[];
+  locationListSliced: LocationVM[];
+  episodeListSliced: EpisodeVM[];
   alignment: string;
 }
 
-export const RmListComponent: React.FC<Props> = (props) => {
-  const { characterListSliced, alignment } = props;
+export const RMListComponent: React.FC<Props> = (props) => {
+  const { characterListSliced, locationListSliced, episodeListSliced, alignment } = props;
 
   return (
     <>
       <React.Fragment>
-        {(alignment === "character") && (
-          <CharContainer characterListSliced={characterListSliced} />
-        )}
+        {alignment === "character" && <CharContainer characterListSliced={characterListSliced} />}
+        {alignment === "location" && <LocationContainer locationListSliced={locationListSliced} />}
+        {alignment === "episode" && <EpisodeContainer episodeListSliced={episodeListSliced} />}
       </React.Fragment>
     </>
   );
