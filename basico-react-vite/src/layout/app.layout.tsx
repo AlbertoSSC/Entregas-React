@@ -2,7 +2,9 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "@mui/material";
 
-import { switchRoutes } from "@/core/router/routes";
+import { routes } from "@/core";
+import { blueGrey } from "@mui/material/colors";
+import { CustomLink } from "./Header-Custom-Link";
 
 interface Props extends React.PropsWithChildren {}
 
@@ -12,18 +14,9 @@ export const AppLayout: React.FC<Props> = (props) => {
   return (
     <div className="layout-app-container">
       <div className="layout-app-nav">
-        <Link underline="none" component={RouterLink} to={switchRoutes.root}
-        sx={{display:"flex", justifyContent:"center", width:"120px"}}>
-          Home
-        </Link>
-        <Link underline="none" component={RouterLink} to={switchRoutes.list}
-        sx={{display:"flex", justifyContent:"center", width:"120px"}}>
-          Github
-        </Link>
-        <Link underline="none" component={RouterLink} to={switchRoutes.rm_list}
-        sx={{display:"flex", justifyContent:"center", width:"120px"}}>
-          Rick&Morty
-        </Link>
+        <CustomLink to={routes.root}>Home</CustomLink>
+        <CustomLink to={routes.list}>Github</CustomLink>
+        <CustomLink to={routes.rm_list}>Rick&Morty</CustomLink>
       </div>
       {children}
     </div>

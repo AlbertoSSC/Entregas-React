@@ -1,5 +1,5 @@
 import React from "react";
-import { HomeComponent } from "./home.component";
+import { HomeComponent } from "@/pods";
 
 export const HomeContainer: React.FC = () => {
   return (

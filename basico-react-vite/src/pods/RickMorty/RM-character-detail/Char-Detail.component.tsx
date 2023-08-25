@@ -61,6 +61,7 @@ export const CharDetailComponent: React.FC<Props> = (props) => {
             width: "100%",
             justifyContent: "center",
           }}
+          disabled={charDetailVM.location.name === "unknown" && true}
           href={routes.rm_loc_detail(urlLocationId)}
         >
           {charDetailVM.location.name}

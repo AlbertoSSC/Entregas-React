@@ -1,3 +1,10 @@
+$primaryColor: #1976d2;
+$primaryLight: #90caf9;
+$primaryDark: #1565c0;
+
+$secondaryGrey: rgba(216, 216, 216, 0.5);
+$secondaryGreyLight: rgb(171, 171, 171);
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
     Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -25,16 +32,8 @@ body {
   justify-items: center;
 }
 
-.layout-app-header {
-  color: white;
-  background-color: #007661;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 5px;
-}
-
 .layout-app-nav {
+  margin-right: 2rem;
   display: flex;
   width: 300px;
   align-items: center;
@@ -56,7 +55,7 @@ body {
   width: max-content;
 }
 .grid-column-1-header {
-  background-color: #1565c0;
+  background-color: $primaryColor;
   color: white;
   font-weight: 500;
   padding: 4px;
@@ -64,13 +63,13 @@ body {
   border-bottom-left-radius: 6px;
 }
 .grid-column-2-header {
-  background-color: #1565c0;
+  background-color: $primaryColor;
   color: white;
   font-weight: 500;
   padding: 4px;
 }
 .grid-column-3-header {
-  background-color: #1565c0;
+  background-color: $primaryColor;
   color: white;
   font-weight: 500;
   padding: 4px;
@@ -83,7 +82,7 @@ body {
   justify-content: center;
   font-size: 32px;
   font-weight: bold;
-  color: #1565c0;
+  color: $primaryColor;
   font-style: italic;
 }
 
@@ -137,7 +136,7 @@ body {
 .detail-container {
   display: flex;
   flex-direction: column;
-  border: 1px solid #90caf9;
+  border: 1px solid $primaryLight;
   border-radius: 8px;
   max-width: 400px;
 }
@@ -150,17 +149,19 @@ body {
 }
 
 .char-detail-span-orig-loc {
-  color: rgb(171, 171, 171);
+  color: $secondaryGreyLight;
   font-size: small;
   padding-top: 6px;
 }
 
-.resident-list-container{
+.resident-list-container {
   display: grid;
   grid-template-columns: 60px min-content;
   margin: 0.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.span-loc-name{
+.span-loc-name {
   font-weight: 500;
 }

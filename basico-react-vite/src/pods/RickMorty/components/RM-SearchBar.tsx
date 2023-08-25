@@ -33,6 +33,7 @@ export const RmSearchBar: React.FC<Props> = (props) => {
           type="text"
           size="small"
           label={currentSearch || "Introducir texto"}
+          value={currentSearch || ""}
           onChange={handleGetRMSearchInput}
         />
         <Button onClick={handleOnClick} variant="contained" size="small">

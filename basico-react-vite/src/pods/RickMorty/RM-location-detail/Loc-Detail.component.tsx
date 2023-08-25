@@ -15,6 +15,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { routes } from "@/core";
+
 import { CharacterVM, LocationVM } from "@/pods";
 
 interface Props {
@@ -35,13 +36,13 @@ export const LocDetailComponent: React.FC<Props> = (props) => {
 
         <span className="char-detail-span-orig-loc">DIMENSIÓN</span>
         <span>{locDetailVM.dimension || "N/A"}</span>
-        <span className="char-detail-span-orig-loc">RESIDENTES: {locDetailVM.residents.length}</span>
+        <span className="char-detail-span-orig-loc">
+          RESIDENTES: {locDetailVM.residents.length}
+        </span>
 
         <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-          >
-            <Typography sx={{fontSize: 12}}>  --- VER RESIDENTES ---</Typography>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography sx={{ fontSize: 12 }}> --- VER RESIDENTES ---</Typography>
           </AccordionSummary>
 
           <AccordionDetails>
@@ -56,6 +57,12 @@ export const LocDetailComponent: React.FC<Props> = (props) => {
                     />
                     <ListItemButton
                       component={routerLink}
+                      sx={{
+                        display: "flex",
+                        minWidth: "150px",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
                       to={routes.rm_char_detail(resident.id.toString())}
                     >
                       {resident.name}

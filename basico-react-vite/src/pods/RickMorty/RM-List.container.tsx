@@ -8,24 +8,17 @@ import {
   ToggleSection,
   setPropsToSearch,
   RMListComponent,
-  fetchList,
-  calculateTotalPages,
+  useFetchList,
 } from "@/pods";
 
 export const RmListContainer: React.FC = () => {
   const [currentSearch, setCurrentSearch] = React.useState("");
-  const [debounceCurrentSearch] = useDebounce(currentSearch, 500);
-  
+  const [debounceSetCurrentSearch] = useDebounce(setCurrentSearch, 500);
+
   const [renderSearch, setRenderSearch] = React.useState("");
 
-  const [characterList, setCharacterList] = React.useState([]);
-  const [characterListSliced, setCharacterListSliced] = React.useState([]);
-
-  const [locationList, setLocationList] = React.useState([]);
-  const [locationListSliced, setLocationListSliced] = React.useState([]);
-
-  const [episodeList, setEpisodeList] = React.useState([]);
-  const [episodeListSliced, setEpisodeListSliced] = React.useState([]);
+  const [itemsList, setItemsList] = React.useState([]);
+  const [itemsListSliced, setItemsListSliced] = React.useState([]);
 
   const itemsPerPage = 5;
   const [page, setPage] = React.useState(1);
@@ -35,64 +28,47 @@ export const RmListContainer: React.FC = () => {
   const notInputText = document.getElementById("not-found-text");
 
   React.useEffect(() => {
-    const CalculatePaginationPages = calculateTotalPages(
-      alignment,
-      itemsPerPage,
-      characterList,
-      locationList,
-      episodeList
-    );
-    setTotalPages(CalculatePaginationPages);
-  }, [characterList, locationList, episodeList]);
+    const CalcPaginationPages = Math.ceil(itemsList.length / itemsPerPage);
+    setTotalPages(CalcPaginationPages);
+  }, [itemsList]);
 
   React.useEffect(() => {
     if (localStorage.getItem("search") !== null && localStorage.getItem("search") !== "") {
       setRenderSearch(localStorage.getItem("search"));
     } else {
       const fetchingList = async () => {
-        const fetchedList = await fetchList(alignment);
-        if (alignment === "character") setCharacterList(fetchedList);
-        if (alignment === "location") setLocationList(fetchedList);
-        if (alignment === "episode") setEpisodeList(fetchedList);
+        const fetchedList = await useFetchList(alignment);
+        setItemsList(fetchedList);
       };
       fetchingList();
     }
   }, [alignment]);
 
   React.useEffect(() => {
-    if (alignment === "character") {
-      const listCharSlice = characterList.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-      setCharacterListSliced(listCharSlice);
-    } else if (alignment === "location") {
-      const listLocationSlice = locationList.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-      setLocationListSliced(listLocationSlice);
-    } else if (alignment === "episode") {
-      const listEpisodeSlice = episodeList.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-      setEpisodeListSliced(listEpisodeSlice);
-    }
-  }, [characterList, locationList, episodeList, page]);
+    const listSlice = itemsList.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+    setItemsListSliced(listSlice);
+  }, [itemsList, page]);
 
   React.useEffect(() => {
     const fetchAndMatch = async () => {
       if (renderSearch === "") {
-        setCharacterList([]);
+        setItemsList([]);
       }
+      const itemsMatched = await setPropsToSearch(alignment, renderSearch);
 
-      const characterMatched = await setPropsToSearch(alignment, renderSearch);
-      setCharacterList(characterMatched);
-
-      if (characterMatched.length !== 0) {
-        setCharacterList(characterMatched);
+      if (itemsMatched.length !== 0) {
+        setItemsList(itemsMatched);
         notInputText && notInputText.classList.add("hidden");
+        localStorage.setItem("search", "");
       } else {
-        notInputText.classList.remove("hidden");
+        notInputText && notInputText.classList.remove("hidden");
       }
     };
     fetchAndMatch();
   }, [renderSearch]);
 
   const handleGetSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentSearch(event.target.value);
+    debounceSetCurrentSearch(event.target.value);
   };
 
   const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -111,6 +87,7 @@ export const RmListContainer: React.FC = () => {
     if (newAlignment !== null) setAlignment(newAlignment);
     localStorage.setItem("search", "");
     setCurrentSearch("");
+    setRenderSearch("");
     setPage(1);
   };
 
@@ -121,14 +98,9 @@ export const RmListContainer: React.FC = () => {
       <RmSearchBar
         handleGetRMSearchInput={handleGetSearchInput}
         handleRMSearchSubmit={handleSearchSubmit}
-        currentSearch={debounceCurrentSearch}
+        currentSearch={currentSearch}
       />
-      <RMListComponent
-        alignment={alignment}
-        locationListSliced={locationListSliced}
-        episodeListSliced={episodeListSliced}
-        characterListSliced={characterListSliced}
-      />
+      <RMListComponent alignment={alignment} itemsListSliced={itemsListSliced} />
 
       <Pagination
         count={totalPages}

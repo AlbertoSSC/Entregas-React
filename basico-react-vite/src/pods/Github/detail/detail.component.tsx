@@ -1,10 +1,10 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 import { Avatar, Button, Divider, ListItemButton } from "@mui/material";
 
-import { routes } from "../../core";
-import { divideCamelCase } from "./component/Member-Name-Divide";
-import { MemberDetailEntity } from "./detail.vm";
+import { routes } from "@/core";
+import { MemberDetailEntity, divideCamelCase } from "@/pods";
 
 interface Props {
   member: MemberDetailEntity;

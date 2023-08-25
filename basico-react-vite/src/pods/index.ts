@@ -1,4 +1,3 @@
-export * from "./list";
-export * from "./detail";
-export * from "./home";
+export * from "./Home";
+export * from "./Github";
 export * from "./RickMorty";

@@ -46,24 +46,34 @@ export const EpisodeDetailComponent: React.FC<Props> = (props) => {
 
           <AccordionDetails>
             <div>
-              {characterData.map((character) => (
-                <React.Fragment key={character.id}>
-                  <div className="resident-list-container">
-                    <Avatar
-                      sx={{ margin: "auto", width: 50, height: 50 }}
-                      alt="avatar"
-                      src={character.image}
-                    />
-                    <ListItemButton
-                      component={routerLink}
-                      to={routes.rm_char_detail(character.id.toString())}
-                    >
-                      {character.name}
-                    </ListItemButton>
-                  </div>
-                  <Divider />
-                </React.Fragment>
-              ))}
+              {!characterData ? (
+                <div>Cargando...</div>
+              ) : (
+                characterData.map((character) => (
+                  <React.Fragment key={character.id}>
+                    <div className="resident-list-container">
+                      <Avatar
+                        sx={{ margin: "auto", width: 50, height: 50 }}
+                        alt="avatar"
+                        src={character.image}
+                      />
+                      <ListItemButton
+                        component={routerLink}
+                        sx={{
+                          display: "flex",
+                          minWidth: "150px",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                        to={routes.rm_char_detail(character.id.toString())}
+                      >
+                        {character.name}
+                      </ListItemButton>
+                    </div>
+                    <Divider />
+                  </React.Fragment>
+                ))
+              )}
             </div>
           </AccordionDetails>
         </Accordion>

@@ -1,5 +1,4 @@
-import { MemberEntity } from "./api/api.model";
-import { Member } from "./list.vm";
+import { MemberEntity, Member } from "@/pods";
 
 export const mapMembersToVM = (member: MemberEntity[]): Member[] => {
   return member.map(mapMemberToVM);

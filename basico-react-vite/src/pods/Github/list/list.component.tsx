@@ -1,11 +1,11 @@
 import React from "react";
-import { Avatar, Divider, Link } from "@mui/material";
+
 import { Link as RouterLink } from "react-router-dom";
+import { Avatar, Divider, Link } from "@mui/material";
 
-import { routes } from "../../core";
+import { routes } from "@/core";
 
-import { HeaderList } from "./components/Header-List";
-import { Member } from "./list.vm";
+import { HeaderList, Member } from "@/pods";
 
 interface Props {
   memberList: Member[];

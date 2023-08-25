@@ -1,4 +1,4 @@
-import { MemberEntity } from "./api.model";
+import { MemberEntity } from "@/pods";
 
 export const getMembers = async (organization: string): Promise<MemberEntity[]> => {
   const response = await fetch(`https://api.github.com/orgs/${organization}/members`);

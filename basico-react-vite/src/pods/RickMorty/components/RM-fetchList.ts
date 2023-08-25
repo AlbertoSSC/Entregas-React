@@ -1,6 +1,6 @@
 import { fetchForApiTotalPages, getCharacterList, getEpisodeList, getLocationList } from "@/pods";
 
-export const fetchList = async (alignment: string) => {
+export const useFetchList = async (alignment: string) => {
   let fetchedList = [];
   const apiTotalPages = await fetchForApiTotalPages(alignment);
 

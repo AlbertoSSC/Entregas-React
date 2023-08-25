@@ -1,7 +1,8 @@
 import { Link as routerLink } from "react-router-dom";
 
-import { switchRoutes } from "@/core/router/routes";
-import { Avatar, Box, Link, Typography } from "@mui/material";
+import { Avatar, Link, Typography } from "@mui/material";
+
+import { routes } from "@/core";
 
 import githubLogo from "@/pods/home/assets/images/Github_logo.png";
 
@@ -16,7 +17,7 @@ export const GithubSection = () => {
         underline="none"
         component={routerLink}
         onClick={handleOncClic}
-        to={switchRoutes.list}
+        to={routes.list}
         sx={{
           display: "flex",
           flexDirection: "column",

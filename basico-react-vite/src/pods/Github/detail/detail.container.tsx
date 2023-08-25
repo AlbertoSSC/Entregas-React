@@ -1,8 +1,8 @@
 import React from "react";
+
 import { useParams } from "react-router-dom";
 
-import { MemberDetailEntity } from "./detail.vm";
-import { DetailComponent } from "./detail.component";
+import { DetailComponent, MemberDetailEntity } from "@/pods";
 
 export const DetailContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();

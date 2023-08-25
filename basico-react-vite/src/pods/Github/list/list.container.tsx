@@ -1,23 +1,23 @@
 import React from "react";
+
 import { Pagination } from "@mui/material";
 
-import { SearchBar } from "./components/Search";
-import { ListComponent } from "./list.component";
-
-import { getMembers } from "./api";
-import { mapMembersToVM } from "./list.mappers";
+import { SearchBar, ListComponent, mapMembersToVM } from "@/pods";
+import { getMembers } from "@/pods";
 
 export const ListContainer: React.FC = () => {
   const [search, setSearch] = React.useState("");
+
   const [organization, setOrganization] = React.useState(
     localStorage.getItem("organization") || "LEMONCODE"
   );
-  const [memberList, setMemberList] = React.useState([]);
 
   const membersPerPage = 5;
+  const [memberList, setMemberList] = React.useState([]);
+  const [memberSliced, setMemberSliced] = React.useState(memberList.slice(0, membersPerPage - 1));
+
   const totalPages = Math.ceil(memberList.length / membersPerPage);
   const [page, setPage] = React.useState(1);
-  const [memberSliced, setMemberSliced] = React.useState(memberList.slice(0, membersPerPage - 1));
 
   const notInputText = document.getElementById("not-found-text");
 
@@ -39,6 +39,11 @@ export const ListContainer: React.FC = () => {
     }
   }, [organization]);
 
+  React.useEffect(() => {
+    const membersPageSlice = memberList.slice((page - 1) * membersPerPage, page * membersPerPage);
+    setMemberSliced(membersPageSlice);
+  }, [memberList, page]);
+
   const handleGetSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
@@ -55,11 +60,6 @@ export const ListContainer: React.FC = () => {
     setPage(page);
     window.scrollTo(0, 0);
   };
-
-  React.useEffect(() => {
-    const membersPageSlice = memberList.slice((page - 1) * membersPerPage, page * membersPerPage);
-    setMemberSliced(membersPageSlice);
-  }, [memberList, page]);
 
   return (
     <>

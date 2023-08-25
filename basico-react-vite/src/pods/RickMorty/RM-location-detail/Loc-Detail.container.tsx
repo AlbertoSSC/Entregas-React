@@ -1,15 +1,14 @@
 import React from "react";
+
 import { useParams } from "react-router-dom";
 
 import {
-  LocationVM,
+  LocDetailComponent,
   getCharacter,
   getLocation,
-  CharacterVM,
   CharacterEntity,
   LocationEntity,
 } from "@/pods";
-import { LocDetailComponent } from "./Loc-Detail.component";
 
 export const LocationDetailContainer = () => {
   const { id } = useParams<{ id: string }>();
@@ -40,7 +39,6 @@ export const LocationDetailContainer = () => {
     getLocation(id).then(setLocDetail);
   }, [id]);
 
- 
   return !locDetail || !residentData ? (
     <h4>Cargando...</h4>
   ) : (

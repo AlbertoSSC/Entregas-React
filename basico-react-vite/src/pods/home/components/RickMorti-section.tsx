@@ -1,7 +1,7 @@
 import { Link as routerLink } from "react-router-dom";
-
-import { switchRoutes } from "@/core/router/routes";
 import { Avatar, Link, Typography } from "@mui/material";
+
+import { routes } from "@/core";
 
 import RM_logo from "@/pods/home/assets/images/R&M_logo.png";
 
@@ -16,7 +16,7 @@ export const RickMortiSection = () => {
         underline="none"
         component={routerLink}
         onClick={handleOncClic}
-        to={switchRoutes.rm_list}
+        to={routes.rm_list}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -34,7 +34,9 @@ export const RickMortiSection = () => {
           },
         }}
       >
-        <Typography sx={{ color: "white", fontSize: "24px", margin: "1rem" }}>Rick & Morty</Typography>
+        <Typography sx={{ color: "white", fontSize: "24px", margin: "1rem" }}>
+          Rick & Morty
+        </Typography>
         <Avatar sx={{ width: 100, height: 100 }} alt="Github avatar" src={RM_logo} />
         <Typography sx={{ color: "white", textAlign: "center", margin: "1rem" }}>
           Explore el mundo y los personajes de la serie Rick & Morty
