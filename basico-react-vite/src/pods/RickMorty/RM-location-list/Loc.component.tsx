@@ -19,6 +19,7 @@ export const LocationComponent: React.FC = () => {
             component={RouterLink}
             to={routes.rm_loc_detail(location.id.toString())}
             sx={{
+              height: "80px",
               borderRadius: "8px",
               textDecoration: "none",
               "&:hover": { backgroundColor: "#e3f2fd" },
@@ -30,7 +31,7 @@ export const LocationComponent: React.FC = () => {
               <span> {location.dimension} </span>
             </div>
           </Link>
-          <Divider />
+          <Divider sx={{ width: "200px" }} />
         </React.Fragment>
       ))}
     </>

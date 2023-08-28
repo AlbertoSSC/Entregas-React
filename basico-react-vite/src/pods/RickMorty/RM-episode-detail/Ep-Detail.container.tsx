@@ -1,14 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import { getCharacter, CharacterEntity, EpisodeEntity, getEpisode } from "@/pods";
+import { CharacterVM, EpisodeVM, getCharacter, getEpisode } from "@/pods";
 import { EpisodeDetailComponent } from "./Ep-Detail.component";
 
 export const EpisodeDetailContainer: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
-  const [episodeDetail, setEpisodeDetail] = React.useState<EpisodeEntity>();
-  const [characterData, setCharacterData] = React.useState<CharacterEntity[]>([]);
+  const [episodeDetail, setEpisodeDetail] = React.useState<EpisodeVM>();
+  const [characterData, setCharacterData] = React.useState<CharacterVM[]>([]);
 
   React.useEffect(() => {
     if (episodeDetail && episodeDetail.characters) {

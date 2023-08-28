@@ -5,5 +5,5 @@ export const mapMembersToVM = (member: MemberEntity[]): Member[] => {
 };
 
 const mapMemberToVM = (member: MemberEntity): Member => {
-  return { id: member.id, login: member.login, avatarUrl: member.avatar_url,};
+  return { id: member.id, login: member.login, avatarUrl: member.avatar_url };
 };

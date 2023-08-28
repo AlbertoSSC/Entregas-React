@@ -6,15 +6,15 @@ import {
   LocDetailComponent,
   getCharacter,
   getLocation,
-  CharacterEntity,
-  LocationEntity,
+  CharacterVM,
+  LocationVM,
 } from "@/pods";
 
 export const LocationDetailContainer = () => {
   const { id } = useParams<{ id: string }>();
 
-  const [locDetail, setLocDetail] = React.useState<LocationEntity>();
-  const [residentData, setResidentData] = React.useState<CharacterEntity[]>([]);
+  const [locDetail, setLocDetail] = React.useState<LocationVM>();
+  const [residentData, setResidentData] = React.useState<CharacterVM[]>([]);
 
   React.useEffect(() => {
     if (locDetail && locDetail.residents) {

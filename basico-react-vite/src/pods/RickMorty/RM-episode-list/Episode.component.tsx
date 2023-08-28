@@ -19,6 +19,7 @@ export const EpisodeComponent: React.FC = () => {
             component={RouterLink}
             to={routes.rm_ep_detail(episode.id.toString())}
             sx={{
+              height: "80px",
               borderRadius: "8px",
               textDecoration: "none",
               "&:hover": { backgroundColor: "#e3f2fd" },

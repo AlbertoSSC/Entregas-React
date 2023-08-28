@@ -17,15 +17,15 @@ export const DetailComponent: React.FC<Props> = (props) => {
     <div className="detail-container">
       <div className="item-detail-container">
         <h3>{divideCamelCase(member.name)}</h3>
-        <span>User name: {member.login}</span>
-        <span>Id: {member.id}</span>
+        <span className="text-grey-span">User name: {member.login}</span>
+        <span className="text-grey-span">Id: {member.id}</span>
         <Avatar
           sx={{ width: 100, height: 100, margin: "8px" }}
           alt="avatar"
           src={member.avatar_url}
         />
         <Divider sx={{ width: "100%", margin: "8px 0px 8px 0px" }} />
-        <span>{member.type.toUpperCase()}</span>
+        <span className="text-grey-span">{member.type.toUpperCase()}</span>
         <ListItemButton
           sx={{
             textOverflow: "ellipsis",
@@ -37,8 +37,8 @@ export const DetailComponent: React.FC<Props> = (props) => {
         >
           {member.html_url}
         </ListItemButton>
-        <span>Followers: {member.followers}</span>
-        <span>Following: {member.following}</span>
+        <span className="text-grey-span">Followers: {member.followers}</span>
+        <span className="text-grey-span">Following: {member.following}</span>
       </div>
       <Button
         sx={{ borderRadius: "0px 0px 8px 8px" }}

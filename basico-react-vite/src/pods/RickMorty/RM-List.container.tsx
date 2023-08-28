@@ -9,9 +9,9 @@ import {
   setPropsToSearch,
   RMListComponent,
   useFetchList,
+  ItemsListSlicedContext,
+  SearchType,
 } from "@/pods";
-
-import { ItemsListSlicedContext } from "@/pods";
 
 export const RmListContainer: React.FC = () => {
   const [currentSearch, setCurrentSearch] = React.useState("");
@@ -25,7 +25,7 @@ export const RmListContainer: React.FC = () => {
   const itemsPerPage = 5;
   const [page, setPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(0);
-  const [alignment, setAlignment] = React.useState("character");
+  const [alignment, setAlignment] = React.useState<SearchType>("character");
 
   const notInputText = document.getElementById("not-found-text");
 
@@ -85,7 +85,7 @@ export const RmListContainer: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
-  const handleToogleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: string) => {
+  const handleToogleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: SearchType) => {
     if (newAlignment !== null) setAlignment(newAlignment);
     localStorage.setItem("search", "");
     setCurrentSearch("");
