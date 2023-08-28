@@ -4,20 +4,16 @@ import { Link as RouterLink } from "react-router-dom";
 import { Avatar, Divider, Link } from "@mui/material";
 
 import { routes } from "@/core";
-import { CharHeaderList, CharacterVM } from "@/pods";
+import { CharHeaderList, CharacterVM, ItemsListSlicedContext } from "@/pods";
 
-interface Props {
-  characterListSliced: CharacterVM[];
-}
-
-export const CharComponent: React.FC<Props> = (props) => {
-  const { characterListSliced } = props;
+export const CharComponent: React.FC = () => {
+  const itemsListSliced = React.useContext(ItemsListSlicedContext);
 
   return (
     <>
       <CharHeaderList />
 
-      {characterListSliced.map((char: CharacterVM) => (
+      {itemsListSliced.map((char: CharacterVM) => (
         <React.Fragment key={char.id}>
           <Link
             component={RouterLink}

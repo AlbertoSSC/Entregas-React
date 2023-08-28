@@ -28,15 +28,18 @@ export const LocDetailComponent: React.FC<Props> = (props) => {
 
   return (
     <div className="detail-container">
-      <div className="member-detail-container">
+      <div className="item-detail-container">
         <h3>{locDetailVM.name}</h3>
 
-        <span className="char-detail-span-orig-loc">TIPO</span>
+        <span className="item-detail-span-orig-loc">TIPO</span>
         <span>{locDetailVM.type}</span>
 
-        <span className="char-detail-span-orig-loc">DIMENSIÓN</span>
+        <span className="item-detail-span-orig-loc">DIMENSIÓN</span>
         <span>{locDetailVM.dimension || "N/A"}</span>
-        <span className="char-detail-span-orig-loc">
+
+        <Divider sx={{ margin: "10px 0 3px", width: "80%" }} />
+
+        <span className="item-detail-span-orig-loc">
           RESIDENTES: {locDetailVM.residents.length}
         </span>
 
@@ -68,7 +71,6 @@ export const LocDetailComponent: React.FC<Props> = (props) => {
                       {resident.name}
                     </ListItemButton>
                   </div>
-                  <Divider />
                 </React.Fragment>
               ))}
             </div>

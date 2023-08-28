@@ -15,7 +15,7 @@ export const DetailComponent: React.FC<Props> = (props) => {
 
   return (
     <div className="detail-container">
-      <div className="member-detail-container">
+      <div className="item-detail-container">
         <h3>{divideCamelCase(member.name)}</h3>
         <span>User name: {member.login}</span>
         <span>Id: {member.id}</span>

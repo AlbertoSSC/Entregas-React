@@ -1,10 +1,10 @@
 import React from "react";
-import { HomeComponent } from "@/pods";
+import { HomePageContent } from "@/pods";
 
 export const HomeContainer: React.FC = () => {
   return (
     <>
-      <HomeComponent />
+      <HomePageContent />
     </>
   );
 };

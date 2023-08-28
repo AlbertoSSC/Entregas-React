@@ -3,17 +3,17 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Divider, Link } from "@mui/material";
 
-import { EpisodeVM, LocHeaderList } from "@/pods";
+import { ItemsListSlicedContext, LocHeaderList } from "@/pods";
 import { routes } from "@/core";
 
-export const EpisodeComponent: React.FC<{ episodeListSliced: EpisodeVM[] }> = (props) => {
-  const { episodeListSliced: episodeListSliced } = props;
+export const EpisodeComponent: React.FC = () => {
+  const itemsListSliced = React.useContext(ItemsListSlicedContext);
 
   return (
     <>
       <LocHeaderList />
 
-      {episodeListSliced.map((episode) => (
+      {itemsListSliced.map((episode) => (
         <React.Fragment key={episode.id}>
           <Link
             component={RouterLink}

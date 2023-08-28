@@ -11,6 +11,8 @@ import {
   useFetchList,
 } from "@/pods";
 
+import { ItemsListSlicedContext } from "@/pods";
+
 export const RmListContainer: React.FC = () => {
   const [currentSearch, setCurrentSearch] = React.useState("");
   const [debounceSetCurrentSearch] = useDebounce(setCurrentSearch, 500);
@@ -100,7 +102,9 @@ export const RmListContainer: React.FC = () => {
         handleRMSearchSubmit={handleSearchSubmit}
         currentSearch={currentSearch}
       />
-      <RMListComponent alignment={alignment} itemsListSliced={itemsListSliced} />
+      <ItemsListSlicedContext.Provider value={itemsListSliced}>
+        <RMListComponent alignment={alignment} />
+      </ItemsListSlicedContext.Provider>
 
       <Pagination
         count={totalPages}

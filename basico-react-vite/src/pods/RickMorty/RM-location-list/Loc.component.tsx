@@ -1,19 +1,19 @@
 import React from "react";
 
 import { Link as RouterLink } from "react-router-dom";
-import { Avatar, Divider, Link } from "@mui/material";
+import { Divider, Link } from "@mui/material";
 
-import { LocHeaderList, LocationVM } from "@/pods";
+import { ItemsListSlicedContext, LocHeaderList } from "@/pods";
 import { routes } from "@/core";
 
-export const LocationComponent: React.FC<{ locationListSliced: LocationVM[] }> = (props) => {
-  const { locationListSliced } = props;
+export const LocationComponent: React.FC = () => {
+  const itemsListSliced = React.useContext(ItemsListSlicedContext);
 
   return (
     <>
       <LocHeaderList />
 
-      {locationListSliced.map((location) => (
+      {itemsListSliced.map((location) => (
         <React.Fragment key={location.id}>
           <Link
             component={RouterLink}

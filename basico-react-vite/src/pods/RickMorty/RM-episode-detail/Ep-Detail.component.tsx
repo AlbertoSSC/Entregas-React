@@ -27,15 +27,18 @@ export const EpisodeDetailComponent: React.FC<Props> = (props) => {
 
   return (
     <div className="detail-container">
-      <div className="member-detail-container">
+      <div className="item-detail-container">
         <h3>{epDetailVM.name}</h3>
 
-        <span className="char-detail-span-orig-loc">EPISODIO</span>
+        <span className="item-detail-span-orig-loc">EPISODIO</span>
         <span>{epDetailVM.episode}</span>
 
-        <span className="char-detail-span-orig-loc">FECHA DE EMISIÓN</span>
+        <span className="item-detail-span-orig-loc">FECHA DE EMISIÓN</span>
         <span>{epDetailVM.air_date || "N/A"}</span>
-        <span className="char-detail-span-orig-loc">
+
+        <Divider sx={{ margin: "10px 0 3px", width: "80%" }} />
+
+        <span className="item-detail-span-orig-loc">
           PERSONAJES: {epDetailVM.characters.length}
         </span>
 
@@ -70,7 +73,6 @@ export const EpisodeDetailComponent: React.FC<Props> = (props) => {
                         {character.name}
                       </ListItemButton>
                     </div>
-                    <Divider />
                   </React.Fragment>
                 ))
               )}

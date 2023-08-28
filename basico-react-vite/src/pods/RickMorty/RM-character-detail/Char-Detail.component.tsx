@@ -21,20 +21,25 @@ export const CharDetailComponent: React.FC<Props> = (props) => {
 
   return (
     <div className="detail-container">
-      <div className="member-detail-container">
+      <div className="item-detail-container">
         <h3>{charDetailVM.name}</h3>
-        <span>{charDetailVM.status}</span>
-        <span>{charDetailVM.species}</span>
-        <span>{charDetailVM.gender}</span>
+        <span className="text-grey-span">{charDetailVM.status}</span>
+        <span className="text-grey-span">{charDetailVM.species}</span>
+        <span className="text-grey-span">{charDetailVM.gender}</span>
 
         <Avatar
           sx={{ width: 100, height: 100, margin: "8px" }}
           alt="avatar"
           src={charDetailVM.image}
         />
-        <Divider sx={{ width: "100%", margin: "8px 0px 8px 0px" }} />
 
-        <span className="char-detail-span-orig-loc">ORIGEN</span>
+        <span className="text-grey-span">
+          Aparece en <b>{charDetailVM.episode.length}</b> episodios
+        </span>
+
+        <Divider sx={{ width: "80%", margin: "8px 0px 8px 0px" }} />
+
+        <span className="item-detail-span-orig-loc">ORIGEN</span>
         <ListItemButton
           sx={{
             borderRadius: 2,
@@ -50,7 +55,7 @@ export const CharDetailComponent: React.FC<Props> = (props) => {
           {charDetailVM.origin.name}
         </ListItemButton>
 
-        <span className="char-detail-span-orig-loc">UBICACIÓN</span>
+        <span className="item-detail-span-orig-loc">UBICACIÓN</span>
         <ListItemButton
           sx={{
             borderRadius: 2,
@@ -66,10 +71,6 @@ export const CharDetailComponent: React.FC<Props> = (props) => {
         >
           {charDetailVM.location.name}
         </ListItemButton>
-
-        <span>
-          Aparece en <b>{charDetailVM.episode.length}</b> episodios
-        </span>
       </div>
 
       <Button
