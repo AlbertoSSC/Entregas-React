@@ -78,6 +78,7 @@ export const ListContainer: React.FC = () => {
         page={page}
         onChange={handlePageChange}
         sx={{
+          margin: "1.5rem",
           display: "flex",
           justifyContent: "center",
         }}

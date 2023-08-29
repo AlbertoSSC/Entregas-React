@@ -42,43 +42,47 @@ export const EpisodeDetailComponent: React.FC<Props> = (props) => {
           PERSONAJES: {epDetailVM.characters.length}
         </span>
 
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ fontSize: 12 }}> --- VER PERSONAJES ---</Typography>
-          </AccordionSummary>
+        {!characterData || characterData.length === 0 ? (
+          <span className="text-grey-span">No hay personajes</span>
+        ) : (
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography sx={{ fontSize: 12 }}> --- VER PERSONAJES ---</Typography>
+            </AccordionSummary>
 
-          <AccordionDetails>
-            <div>
-              {!characterData ? (
-                <div>Cargando...</div>
-              ) : (
-                characterData.map((character) => (
-                  <React.Fragment key={character.id}>
-                    <div className="resident-list-container">
-                      <Avatar
-                        sx={{ margin: "auto", width: 50, height: 50 }}
-                        alt="avatar"
-                        src={character.image}
-                      />
-                      <ListItemButton
-                        component={routerLink}
-                        sx={{
-                          display: "flex",
-                          minWidth: "150px",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                        to={routes.rm_char_detail(character.id.toString())}
-                      >
-                        {character.name}
-                      </ListItemButton>
-                    </div>
-                  </React.Fragment>
-                ))
-              )}
-            </div>
-          </AccordionDetails>
-        </Accordion>
+            <AccordionDetails>
+              <div>
+                {!characterData ? (
+                  <div>Cargando...</div>
+                ) : (
+                  characterData.map((character) => (
+                    <React.Fragment key={character.id}>
+                      <div className="resident-list-container">
+                        <Avatar
+                          sx={{ margin: "auto", width: 50, height: 50 }}
+                          alt="avatar"
+                          src={character.image}
+                        />
+                        <ListItemButton
+                          component={routerLink}
+                          sx={{
+                            display: "flex",
+                            minWidth: "150px",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                          to={routes.rm_char_detail(character.id.toString())}
+                        >
+                          {character.name}
+                        </ListItemButton>
+                      </div>
+                    </React.Fragment>
+                  ))
+                )}
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        )}
       </div>
 
       <Button

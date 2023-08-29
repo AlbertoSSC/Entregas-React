@@ -1,7 +1,7 @@
 import React from "react";
 
-import { AppLayout, CenteredLayout } from "@/layout";
 import { DetailContainer } from "@/pods";
+import { AppLayout, CenteredLayout } from "@/layout";
 
 export const DetailScene: React.FC = () => {
   return (

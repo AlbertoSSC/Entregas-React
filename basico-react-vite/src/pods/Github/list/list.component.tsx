@@ -18,7 +18,6 @@ export const ListComponent: React.FC<Props> = (props) => {
 
   return (
     <>
-      <div className="member-list-container">
         <span className="organization-list-name">{organization.toUpperCase()}</span>
         <span className="member-count">{memberList.length} miembros</span>
         <HeaderList />
@@ -45,10 +44,9 @@ export const ListComponent: React.FC<Props> = (props) => {
                 <span> {member.login} </span>
               </div>
             </Link>
-            <Divider />
+            <Divider sx={{ width: "80%" }} />
           </React.Fragment>
         ))}
-      </div>
     </>
   );
 };

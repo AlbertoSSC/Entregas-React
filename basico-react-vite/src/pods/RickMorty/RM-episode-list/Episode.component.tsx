@@ -19,19 +19,20 @@ export const EpisodeComponent: React.FC = () => {
             component={RouterLink}
             to={routes.rm_ep_detail(episode.id.toString())}
             sx={{
+              display: "inline-grid",
               height: "80px",
               borderRadius: "8px",
               textDecoration: "none",
               "&:hover": { backgroundColor: "#e3f2fd" },
             }}
           >
-            <div className="header-list detail-link">
-              <span className="span-loc-name"> {episode.name} </span>
-              <span> {episode.episode} </span>
+            <div className="header-list item-detail-link">
+              <span className="span-list-item"> {episode.name} </span>
+              <span className="span-list-item"> {episode.episode} </span>
               <span> {episode.air_date} </span>
             </div>
           </Link>
-          <Divider />
+          <Divider sx={{ width: "80%" }} />
         </React.Fragment>
       ))}
     </>

@@ -35,7 +35,7 @@ export const CharComponent: React.FC = () => {
               <span> {char.name} </span>
             </div>
           </Link>
-          <Divider />
+          <Divider sx={{ width: "80%" }} />
         </React.Fragment>
       ))}
     </>

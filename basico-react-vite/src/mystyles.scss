@@ -98,8 +98,8 @@ h3 {
   justify-content: center;
 }
 
-.header-list.detail-link {
-  margin-top: 4px;
+.header-list.item-detail-link {
+  margin: 0;
 }
 
 .header-list {
@@ -179,8 +179,7 @@ h3 {
   text-overflow: ellipsis;
 }
 
-.span-loc-name {
-  font-weight: 500;
+.span-list-item {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

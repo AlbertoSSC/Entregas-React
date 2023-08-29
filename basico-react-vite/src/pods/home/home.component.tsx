@@ -33,7 +33,10 @@ const Card: React.FC<CardProps> = (props) => {
   const { title, copy, route, bg_img } = props;
 
   return (
-    <div className="card" style={{ backgroundImage: `url(${bg_img})` }}>
+    <div
+      className="card"
+      style={{ backgroundImage: `url(${bg_img})`, backgroundBlendMode: "color" }}
+    >
       <div className="content">
         <h2 className="title">{title}</h2>
         <p className="copy">{copy}</p>
@@ -45,7 +48,7 @@ const Card: React.FC<CardProps> = (props) => {
           sx={{
             backgroundColor: "#fff",
             color: "rgb(87, 87, 87)",
-            "&:hover": { backgroundColor: "#90caf9;", color: "#ffffff" },
+            "&:hover": { backgroundColor: "#1976d2;", color: "#ffffff" },
           }}
         >
           Entrar

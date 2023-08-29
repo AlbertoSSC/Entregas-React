@@ -19,19 +19,20 @@ export const LocationComponent: React.FC = () => {
             component={RouterLink}
             to={routes.rm_loc_detail(location.id.toString())}
             sx={{
+              display: "inline-grid",
               height: "80px",
               borderRadius: "8px",
               textDecoration: "none",
               "&:hover": { backgroundColor: "#e3f2fd" },
             }}
           >
-            <div className="header-list detail-link">
-              <span className="span-loc-name"> {location.name} </span>
-              <span> {location.type} </span>
+            <div className="header-list item-detail-link">
+              <span className="span-list-item"> {location.name} </span>
+              <span className="span-list-item"> {location.type} </span>
               <span> {location.dimension} </span>
             </div>
           </Link>
-          <Divider sx={{ width: "200px" }} />
+          <Divider sx={{ width: "80%" }} />
         </React.Fragment>
       ))}
     </>
