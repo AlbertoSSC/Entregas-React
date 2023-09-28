@@ -14,7 +14,9 @@ export const ListContainer: React.FC = () => {
 
   const membersPerPage = 5;
   const [memberList, setMemberList] = React.useState([]);
-  const [memberSliced, setMemberSliced] = React.useState(memberList.slice(0, membersPerPage - 1));
+  const [memberSliced, setMemberSliced] = React.useState(
+    memberList.slice(0, membersPerPage - 1)
+  );
 
   const totalPages = Math.ceil(memberList.length / membersPerPage);
   const [page, setPage] = React.useState(1);
@@ -30,7 +32,8 @@ export const ListContainer: React.FC = () => {
         .then((data) => {
           if (data.length === 0) {
             setMemberList([]);
-            notInputText.innerText = "No hemos encontrado la organización introducida";
+            notInputText.innerText =
+              "No hemos encontrado la organización introducida";
           } else {
             setMemberList(data);
             notInputText ? (notInputText.innerText = "") : null;
@@ -40,7 +43,10 @@ export const ListContainer: React.FC = () => {
   }, [organization]);
 
   React.useEffect(() => {
-    const membersPageSlice = memberList.slice((page - 1) * membersPerPage, page * membersPerPage);
+    const membersPageSlice = memberList.slice(
+      (page - 1) * membersPerPage,
+      page * membersPerPage
+    );
     setMemberSliced(membersPageSlice);
   }, [memberList, page]);
 
@@ -56,7 +62,10 @@ export const ListContainer: React.FC = () => {
     setPage(1);
   };
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
     setPage(page);
     window.scrollTo(0, 0);
   };
@@ -68,11 +77,15 @@ export const ListContainer: React.FC = () => {
         handleSearchSubmit={handleSearchSubmit}
         organization={organization}
       />
-      <ListComponent
-        memberList={memberList}
-        memberSliced={memberSliced}
-        organization={organization}
-      />
+      {memberList.length === 0 ? (
+        <h3>Cargando lista...</h3>
+      ) : (
+        <ListComponent
+          memberList={memberList}
+          memberSliced={memberSliced}
+          organization={organization}
+        />
+      )}
       <Pagination
         count={totalPages}
         page={page}

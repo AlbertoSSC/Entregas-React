@@ -12,6 +12,7 @@ import {
   ItemsListSlicedContext,
   SearchType,
 } from "@/pods";
+import CircularIndeterminate from "./components/circular-progress";
 
 export const RmListContainer: React.FC = () => {
   const [currentSearch, setCurrentSearch] = React.useState("");
@@ -35,7 +36,10 @@ export const RmListContainer: React.FC = () => {
   }, [itemsList]);
 
   React.useEffect(() => {
-    if (localStorage.getItem("search") !== null && localStorage.getItem("search") !== "") {
+    if (
+      localStorage.getItem("search") !== null &&
+      localStorage.getItem("search") !== ""
+    ) {
       setRenderSearch(localStorage.getItem("search"));
     } else {
       const fetchingList = async () => {
@@ -47,7 +51,10 @@ export const RmListContainer: React.FC = () => {
   }, [alignment]);
 
   React.useEffect(() => {
-    const listSlice = itemsList.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+    const listSlice = itemsList.slice(
+      (page - 1) * itemsPerPage,
+      page * itemsPerPage
+    );
     setItemsListSliced(listSlice);
   }, [itemsList, page]);
 
@@ -80,12 +87,18 @@ export const RmListContainer: React.FC = () => {
     setPage(1);
   };
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
     setPage(page);
     window.scrollTo(0, 0);
   };
 
-  const handleToogleChange = (event: React.MouseEvent<HTMLElement>, newAlignment: SearchType) => {
+  const handleToogleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: SearchType
+  ) => {
     if (newAlignment !== null) setAlignment(newAlignment);
     localStorage.setItem("search", "");
     setCurrentSearch("");
@@ -95,7 +108,10 @@ export const RmListContainer: React.FC = () => {
 
   return (
     <>
-      <ToggleSection handleToogleChange={handleToogleChange} alignment={alignment} />
+      <ToggleSection
+        handleToogleChange={handleToogleChange}
+        alignment={alignment}
+      />
 
       <RmSearchBar
         handleGetRMSearchInput={handleGetSearchInput}
@@ -103,7 +119,14 @@ export const RmListContainer: React.FC = () => {
         currentSearch={currentSearch}
       />
       <ItemsListSlicedContext.Provider value={itemsListSliced}>
-        <RMListComponent alignment={alignment} />
+        {!itemsListSliced.length ? (
+          <>
+            <h3>Cargando items...</h3>
+            <CircularIndeterminate />
+          </>
+        ) : (
+          <RMListComponent alignment={alignment} />
+        )}
       </ItemsListSlicedContext.Provider>
 
       <Pagination

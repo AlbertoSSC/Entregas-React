@@ -10,12 +10,10 @@ export const RMListComponent: React.FC<Props> = (props) => {
   const { alignment } = props;
 
   return (
-    <>
-      <React.Fragment>
-        {alignment === "character" && <CharContainer />}
-        {alignment === "location" && <LocationContainer />}
-        {alignment === "episode" && <EpisodeContainer />}
-      </React.Fragment>
-    </>
+    <React.Fragment>
+      {alignment === "character" && <CharContainer />}
+      {alignment === "location" && <LocationContainer />}
+      {alignment === "episode" && <EpisodeContainer />}
+    </React.Fragment>
   );
 };
