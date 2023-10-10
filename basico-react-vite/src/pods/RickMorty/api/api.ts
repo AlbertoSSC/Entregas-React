@@ -1,6 +1,5 @@
 import {
   CharDetailVM,
-  CharacterVM,
   EpisodeVM,
   LocationVM,
   mapCharacterDetailToVM,
@@ -20,8 +19,12 @@ export const fetchForApiTotalPages = async (alignment: string) => {
 
 //Lists
 
-export const getCharacterList = async (apiPage: number): Promise<CharDetailVM[]> => {
-  const response = await fetch(`https://rickandmortyapi.com/api/character?page=${apiPage}`);
+export const getCharacterList = async (
+  apiPage: number
+): Promise<CharDetailVM[]> => {
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/character?page=${apiPage}`
+  );
   const data = await response.json();
   if (!response.ok) {
     console.log("API response no OK");
@@ -32,8 +35,12 @@ export const getCharacterList = async (apiPage: number): Promise<CharDetailVM[]>
   return mappedResults;
 };
 
-export const getLocationList = async (apiPage: number): Promise<LocationVM[]> => {
-  const response = await fetch(`https://rickandmortyapi.com/api/location?page=${apiPage}`);
+export const getLocationList = async (
+  apiPage: number
+): Promise<LocationVM[]> => {
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/location?page=${apiPage}`
+  );
   const data = await response.json();
   if (response.status === 404) {
     return null;
@@ -44,7 +51,9 @@ export const getLocationList = async (apiPage: number): Promise<LocationVM[]> =>
 };
 
 export const getEpisodeList = async (apiPage: number): Promise<EpisodeVM[]> => {
-  const response = await fetch(`https://rickandmortyapi.com/api/episode?page=${apiPage}`);
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/episode?page=${apiPage}`
+  );
   const data = await response.json();
   if (response.status === 404) {
     return null;
@@ -57,7 +66,9 @@ export const getEpisodeList = async (apiPage: number): Promise<EpisodeVM[]> => {
 //Singles
 
 export const getCharacter = async (id: string): Promise<CharDetailVM> => {
-  const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/character/${id}`
+  );
   const data = await response.json();
   if (response.status === 404) {
     return null;
@@ -67,7 +78,9 @@ export const getCharacter = async (id: string): Promise<CharDetailVM> => {
 };
 
 export const getLocation = async (id: string): Promise<LocationVM> => {
-  const response = await fetch(`https://rickandmortyapi.com/api/location/${id}`);
+  const response = await fetch(
+    `https://rickandmortyapi.com/api/location/${id}`
+  );
   const data = await response.json();
   if (response.status === 404) {
     return null;

@@ -15,6 +15,9 @@ import {
 
 import CircularIndeterminate from "./components/circular-progress";
 
+const itemsPerPage = 5;
+const notInputText = document.getElementById("not-found-text");
+
 export const RmListContainer: React.FC = () => {
   const [currentSearch, setCurrentSearch] = React.useState("");
   const [debounceSetCurrentSearch] = useDebounce(setCurrentSearch, 500);
@@ -24,12 +27,15 @@ export const RmListContainer: React.FC = () => {
   const [itemsList, setItemsList] = React.useState([]);
   const [itemsListSliced, setItemsListSliced] = React.useState([]);
 
-  const itemsPerPage = 5;
   const [page, setPage] = React.useState(1);
   const [totalPages, setTotalPages] = React.useState(0);
   const [alignment, setAlignment] = React.useState<SearchType>("character");
 
-  const notInputText = document.getElementById("not-found-text");
+  const [firstToggle, setFirstToggle] = React.useState({
+    character: true,
+    location: true,
+    episode: true,
+  });
 
   React.useEffect(() => {
     const CalcPaginationPages = Math.ceil(itemsList.length / itemsPerPage);
@@ -52,14 +58,6 @@ export const RmListContainer: React.FC = () => {
   }, [alignment]);
 
   React.useEffect(() => {
-    const listSlice = itemsList.slice(
-      (page - 1) * itemsPerPage,
-      page * itemsPerPage
-    );
-    setItemsListSliced(listSlice);
-  }, [itemsList, page]);
-
-  React.useEffect(() => {
     const fetchAndMatch = async () => {
       if (renderSearch === "") {
         setItemsList([]);
@@ -76,6 +74,14 @@ export const RmListContainer: React.FC = () => {
     };
     fetchAndMatch();
   }, [renderSearch]);
+
+  React.useEffect(() => {
+    const listSlice = itemsList.slice(
+      (page - 1) * itemsPerPage,
+      page * itemsPerPage
+    );
+    setItemsListSliced(listSlice);
+  }, [itemsList, page]);
 
   const handleGetSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     debounceSetCurrentSearch(event.target.value);
@@ -101,6 +107,15 @@ export const RmListContainer: React.FC = () => {
     newAlignment: SearchType
   ) => {
     if (newAlignment !== null) setAlignment(newAlignment);
+
+    if (firstToggle[alignment]) {
+      setFirstToggle((prevFirstToggle) => ({
+        ...prevFirstToggle,
+        [alignment]: false,
+      }));
+      setItemsList([]);
+    }
+
     localStorage.setItem("search", "");
     setCurrentSearch("");
     setRenderSearch("");
@@ -122,7 +137,11 @@ export const RmListContainer: React.FC = () => {
       <ItemsListSlicedContext.Provider value={itemsListSliced}>
         {!itemsListSliced.length ? (
           <>
-            <h3>Cargando items...</h3>
+            {alignment === "character" ? (
+              <h3>Cargando 826 personajes...</h3>
+            ) : (
+              <h3>Cargando...</h3>
+            )}
             <CircularIndeterminate />
           </>
         ) : (
