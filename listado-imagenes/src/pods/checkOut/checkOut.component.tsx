@@ -38,7 +38,6 @@ export const CheckOutComponent: React.FC = () => {
       <div id="adopt-button" className="adopt-button">
         <ThemeProvider theme={theme}>
           <Button
-            id="adopt-button"
             variant="contained"
             color="ochre"
             sx={{ fontSize: "1rem" }}

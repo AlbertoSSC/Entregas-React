@@ -121,7 +121,7 @@
   }
 }
 .selected-pet {
-  box-shadow: 0 0 0 5px #ffc400aa; 
+  box-shadow: 0 0 0 5px #ffc400aa;
   border-radius: 10px;
 }
 
@@ -242,4 +242,31 @@
   padding: 0 2rem 2rem;
   border: 1px solid rgba(255, 255, 255, 0.47);
   border-radius: 3px;
+}
+
+.adoptionCompleted-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #ffffff78;
+  box-shadow: 2px 2px 2px #4b4b4b;
+  margin: auto;
+  max-width: 500px;
+  color: #4b4b4b;
+
+  & img {
+    max-width: 400px;
+    border-radius: 300px;
+    margin: auto;
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
+    object-fit: cover;
+  }
 }

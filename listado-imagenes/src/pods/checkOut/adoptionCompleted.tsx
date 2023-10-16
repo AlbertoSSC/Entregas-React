@@ -24,25 +24,7 @@ export const AdoptionCompletedComponent: React.FC = () => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        gap: "1rem",
-        backgroundColor: "white",
-        boxSizing: "border-box",
-        padding: "1rem",
-        borderRadius: "1rem",
-        border: "1px solid #ffffff78",
-        boxShadow: "2px 2px 2px #4b4b4b",
-        margin: "auto",
-        maxWidth: "500px",
-        color: "#4b4b4b",
-      }}
-    >
+    <div className="adoptionCompleted-card">
       <h3>¡Todo ha ido genial!</h3>
 
       <Divider sx={{ width: "100%" }} />
@@ -51,14 +33,6 @@ export const AdoptionCompletedComponent: React.FC = () => {
       <img
         src="src/assets/images/dogs-in-basket.jpg"
         alt="dog in basket image"
-        style={{
-          maxWidth: "400px",
-          borderRadius: "300px",
-          margin: "auto",
-          aspectRatio: "1/1",
-          boxSizing: "border-box",
-          objectFit: "cover",
-        }}
       />
       <ThemeProvider theme={theme}>
         <Button
