@@ -1,0 +1,154 @@
+$blue-primary: rgb(81, 145, 255);
+
+/*HEAD ORDER*/
+.head-container {
+  background-color: #333;
+  box-shadow: 0px 2px 4px #111;
+  border-radius: 5px;
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.layout-head-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.inputs-head-container {
+  > * {
+    margin: 1rem;
+  }
+
+  & .head-inputs {
+    display: flex;
+    padding: 0.5rem 0;
+    border: 1px solid #555;
+    border-radius: 5px;
+    justify-content: space-between;
+
+    > * {
+      margin: 0 0.5rem;
+      inline-size: -webkit-fill-available;
+    }
+  }
+}
+
+.process-order {
+  border: 1px solid #555;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  > * {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  & h1 {
+    margin: 0;
+    padding: 0 0 0 2rem;
+  }
+
+  & span {
+    text-align: center;
+  }
+
+  .totalPrice {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+
+    & span {
+      margin-left: 0.5rem;
+      font-size: large;
+    }
+  }
+
+  .orderState {
+    & Button {
+      &:hover {
+        background-color: #333;
+        box-shadow: 0 0 0 1px $blue-primary;
+      }
+    }
+  }
+}
+
+/*DETAIL PRODUCT LIST*/
+h3 {
+  margin-top: 3rem;
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 2rem 1.5rem;
+  width: 80vw;
+  margin: auto;
+}
+
+thead {
+  background-color: #555;
+}
+
+th {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  text-align: center;
+}
+td {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.productId {
+  background-color: #5d62a511;
+}
+.quantity-input-cell {
+  text-align: right;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+
+  & span {
+    white-space: nowrap;
+  }
+  & input {
+    text-align: right;
+    width: 50px;
+    font-size: large;
+  }
+}
+.price-cell {
+  text-align: right;
+}
+.price-editing-input {
+  & input {
+    width: 80px;
+  }
+}
+
+.subtotal-cell {
+  text-align: right;
+  border: 1px solid #555;
+}
+
+/* VALIDATIONS BUTTONS */
+
+.validation-buttons-container {
+  display: flex;
+  justify-content: space-between;
+
+  margin: 2rem;
+  width: fit-content;
+
+  & Button {
+    margin: 0 0.2rem;
+    border-color: #777;
+    color: white;
+    background-color: #777;
+  }
+}
