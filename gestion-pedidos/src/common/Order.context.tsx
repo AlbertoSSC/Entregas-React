@@ -1,4 +1,11 @@
 import React from "react";
+import { ProductState } from ".";
+
+interface Props {
+  children: React.ReactNode;
+}
+
+/////////////////////////// TOTAL PRICE
 
 interface TotalPriceContextModel {
   totalPrice: number;
@@ -9,10 +16,6 @@ export const TotalPriceContext = React.createContext<TotalPriceContextModel>({
   totalPrice: 0,
   setTotalPrice: () => {},
 });
-
-interface Props {
-  children: React.ReactNode;
-}
 
 export const TotalPriceProvider: React.FC<Props> = (props) => {
   const [totalPrice, setTotalPrice] =
@@ -25,64 +28,24 @@ export const TotalPriceProvider: React.FC<Props> = (props) => {
   );
 };
 
-////
+/////////////////////////// PRODUCT INFO
 
-interface IsCheckedContextModel {
-  isChecked: { id: number; checked: boolean }[];
-  setIsChecked: React.Dispatch<
-    React.SetStateAction<{ id: number; checked: boolean }[]>
-  >;
+interface ProductInfoContextModel {
+  productInfo: ProductState[];
+  setProductInfo: React.Dispatch<React.SetStateAction<ProductState[]>>;
 }
 
-export const IsCheckedContext = React.createContext<IsCheckedContextModel>({
-  isChecked: [{ id: 0, checked: false }],
-  setIsChecked: () => {},
+export const ProductInfoContext = React.createContext<ProductInfoContextModel>({
+  productInfo: [],
+  setProductInfo: () => [],
 });
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export const IsCheckedProvider: React.FC<Props> = (props) => {
-  const [isChecked, setIsChecked] = React.useState<
-    IsCheckedContextModel["isChecked"]
-  >([{ id: 0, checked: false }]);
+export const ProductInfoProvider: React.FC<Props> = (props) => {
+  const [productInfo, setProductInfo] = React.useState<ProductState[]>([]);
 
   return (
-    <IsCheckedContext.Provider value={{ isChecked, setIsChecked }}>
+    <ProductInfoContext.Provider value={{ productInfo, setProductInfo }}>
       {props.children}
-    </IsCheckedContext.Provider>
-  );
-};
-
-//
-
-interface DisplayValidatedTextContextModel {
-  displayValidatedText: string;
-  setDisplayValidatedText: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export const DisplayValidatedTextContext =
-  React.createContext<DisplayValidatedTextContextModel>({
-    displayValidatedText: "Pendiente",
-    setDisplayValidatedText: () => {},
-  });
-
-interface Props {
-  children: React.ReactNode;
-}
-
-export const DisplayValidatedTextProvider: React.FC<Props> = (props) => {
-  const [displayValidatedText, setDisplayValidatedText] =
-    React.useState<DisplayValidatedTextContextModel["displayValidatedText"]>(
-      "PendienteContexto"
-    );
-
-  return (
-    <DisplayValidatedTextContext.Provider
-      value={{ displayValidatedText, setDisplayValidatedText }}
-    >
-      {props.children}
-    </DisplayValidatedTextContext.Provider>
+    </ProductInfoContext.Provider>
   );
 };

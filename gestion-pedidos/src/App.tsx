@@ -1,21 +1,15 @@
 import "./App.scss";
 
-import {
-  DisplayValidatedTextProvider,
-  IsCheckedProvider,
-  TotalPriceProvider,
-} from "@/common";
+import { TotalPriceProvider, ProductInfoProvider } from "@/common";
 import { PedidoContainer } from "@/pods";
 
 function App() {
   return (
     <>
       <TotalPriceProvider>
-        <IsCheckedProvider>
-          <DisplayValidatedTextProvider>
-            <PedidoContainer />
-          </DisplayValidatedTextProvider>
-        </IsCheckedProvider>
+        <ProductInfoProvider>
+          <PedidoContainer />
+        </ProductInfoProvider>
       </TotalPriceProvider>
     </>
   );

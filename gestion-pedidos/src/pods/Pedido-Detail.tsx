@@ -1,72 +1,73 @@
-// PedidoList.tsx
 import React from "react";
 
 import { Divider } from "@mui/material";
 
 import {
-  DisplayValidatedTextContext,
-  IsCheckedContext,
+  initialState,
+  productReducer,
   Product,
   TotalPriceContext,
-  productStock,
+  Action,
+  ProductInfoContext,
 } from "@/common";
-
 import { ValidationButtons } from "@/pods";
 
 const iva = 0.21;
 
 export const PedidoDetail: React.FC = () => {
-  const { setTotalPrice } = React.useContext(TotalPriceContext);
-  const { isChecked, setIsChecked } = React.useContext(IsCheckedContext);
-  const [productValidation, setProductValidation] = React.useState<{
-    [id: number]: string;
-  }>({});
-  const { displayValidatedText } = React.useContext(
-    DisplayValidatedTextContext
+  const [productsReduced, dispatch] = React.useReducer(
+    productReducer,
+    initialState
   );
+  const dispatchAction = (action: Action) => {
+    dispatch(action);
+  };
 
-  const [products, setProduct] = React.useState(productStock);
+  const { setTotalPrice } = React.useContext(TotalPriceContext);
+  const { setProductInfo } = React.useContext(ProductInfoContext);
 
   const [isEditing, setIsEditing] = React.useState(-1);
   const [priceInputValue, setPriceInputValue] = React.useState(0);
-
-  const [productQuantity, setProductQuantity] = React.useState<{
-    [id: number]: number;
-  }>({});
-
   const [subtotalPrice, setSubotalPrice] = React.useState(0.0);
 
   React.useEffect(() => {
-    const totalPrice = products.reduce(
-      (total, product) =>
-        total + product.price * (productQuantity[product.id] || 0),
+    const totalPrice = productsReduced.reduce(
+      (total, p) => total + p.price * (p.quantity || 0),
       0
     );
-    console.log(productQuantity, totalPrice);
-
     setSubotalPrice(totalPrice);
-    setTotalPrice(totalPrice * (iva + 1));
-  }, [productQuantity, products]);
+    setTotalPrice(totalPrice + totalPrice * iva);
 
-  const updatingQuantity = (value: string, product: Product) => {
-    const updatedQuantity: { [key: number]: number } = {
-      ...productQuantity,
-    };
-    updatedQuantity[product.id] = parseFloat(value);
-    return updatedQuantity;
+    const setProduct = productsReduced;
+    setProductInfo(setProduct);
+
+    productsReduced.map((p) => {
+      const inputQuantity = document.getElementById(`productQuantity-${p.id}`);
+      p.quantity > 0
+        ? inputQuantity?.classList.add("quantityOn")
+        : inputQuantity?.classList.remove("quantityOn");
+    });
+  }, [productsReduced]);
+
+  const setNewQuantity = (productId: number, newQuantity: number) => {
+    dispatch({
+      type: "SET_QUANTITY",
+      id: productId,
+      quantity: newQuantity,
+    });
   };
 
-  const handleEditClick = (productId: number) => {
+  const handleEditPrice = (productId: number) => {
     setIsEditing(productId);
   };
 
-  const handleAcceptClick = (product: Product) => {
+  const handleAcceptNewPrice = (product: Product) => {
     setIsEditing(-1);
-    setProduct((prevProduct) =>
-      prevProduct.map((p) =>
-        p.id === product.id ? { ...p, price: priceInputValue } : p
-      )
-    );
+    dispatch({
+      type: "SET_PRICE",
+      id: product.id,
+      price: priceInputValue,
+    });
   };
 
   const handleCheckedProduct = (
@@ -74,49 +75,20 @@ export const PedidoDetail: React.FC = () => {
     productId: number
   ) => {
     const inputChecked = event.target.checked;
-
-    const updatedValidation = { ...productValidation };
-    updatedValidation[productId] = inputChecked ? "Validado" : "Pendiente";
-
-    setProductValidation(updatedValidation);
-
-    console.log("Producto ID:", productId);
-    console.log("Input Checked:", inputChecked);
-
-    if (isChecked.length !== 0) {
-      setIsChecked((prevIsChecked) => {
-        const indexIsChecked = prevIsChecked.findIndex(
-          (p) => p.id === productId
-        );
-
-        if (indexIsChecked !== -1) {
-          const updatedIsChecked = [...prevIsChecked];
-          updatedIsChecked[indexIsChecked] = {
-            id: productId,
-            checked: inputChecked,
-          };
-          return updatedIsChecked;
-        } else {
-          return [...prevIsChecked, { id: productId, checked: inputChecked }];
-        }
-      });
-    } else {
-      setIsChecked([{ id: productId, checked: inputChecked }]);
-    }
-    console.log("Esta cheado el producto " + productId + ": " + inputChecked);
+    dispatch({
+      type: "IS_CHECKED",
+      id: productId,
+      isChecked: inputChecked,
+    });
   };
-  console.log("Estado isChecked después de la actualización:", isChecked);
 
-  const renderValidationText = (id: number): string => {
-    const validationFromProduct = productValidation[id] || "Pendiente";
-    return isChecked.some((p) => p.checked && p.id === id)
-      ? displayValidatedText
-      : validationFromProduct;
-  };
   return (
     <>
       <h3>LISTA DE PRODUCTOS</h3>
-      <ValidationButtons />
+      <ValidationButtons
+        productsReduced={productsReduced}
+        dispatch={dispatchAction}
+      />
 
       <table>
         <thead>
@@ -132,17 +104,22 @@ export const PedidoDetail: React.FC = () => {
 
         <tbody>
           {/* mapper START*/}
-          {products.map((product) => (
+
+          {productsReduced.map((product) => (
             <React.Fragment key={product.id}>
-              <tr key={product.id}>
+              <tr id={`product-row-${product.id}`} className="">
                 <td>
                   <input
+                    name="product"
+                    value={`inputProductID-${product.id}`}
                     type="checkbox"
+                    id="checkbox-input"
+                    className=""
                     onChange={(e) => handleCheckedProduct(e, product.id)}
                   />
                 </td>
 
-                <td>{renderValidationText(product.id)}</td>
+                <td>{product.state}</td>
 
                 <td className="productId">{product.id}</td>
                 <td>{product.name}</td>
@@ -152,12 +129,11 @@ export const PedidoDetail: React.FC = () => {
                     min={0}
                     type="number"
                     name="productQuantity"
+                    className=""
                     id={`productQuantity-${product.id}`}
-                    defaultValue={0}
+                    defaultValue={productsReduced[product.id]?.quantity || 0}
                     onChange={(e) => {
-                      setProductQuantity(
-                        updatingQuantity(e.target.value, product)
-                      );
+                      setNewQuantity(product.id, parseInt(e.target.value));
                     }}
                   />
                 </td>
@@ -176,7 +152,7 @@ export const PedidoDetail: React.FC = () => {
                       />
                       <button
                         id="accept-price"
-                        onClick={() => handleAcceptClick(product)}
+                        onClick={() => handleAcceptNewPrice(product)}
                       >
                         Aceptar
                       </button>
@@ -200,7 +176,7 @@ export const PedidoDetail: React.FC = () => {
                           display:
                             isEditing === product.id ? "none" : "inline-block",
                         }}
-                        onClick={() => handleEditClick(product.id)}
+                        onClick={() => handleEditPrice(product.id)}
                       >
                         &#9998; Editar
                       </button>

@@ -1,4 +1,5 @@
 $blue-primary: rgb(81, 145, 255);
+$green-primary: rgba(101, 194, 128, 0.812);
 
 /*HEAD ORDER*/
 .head-container {
@@ -104,6 +105,10 @@ td {
   padding: 0.5rem;
 }
 
+#checkbox-input{
+  transform: scale(2)
+}
+
 .productId {
   background-color: #5d62a511;
 }
@@ -122,6 +127,13 @@ td {
     font-size: large;
   }
 }
+.quantityOn {
+  box-shadow: 10px 5px 0 1px $green-primary;
+}
+.quantityZero {
+  box-shadow: 10px 5px 0 1px rgb(255, 173, 79);
+}
+
 .price-cell {
   text-align: right;
 }
@@ -136,9 +148,33 @@ td {
   border: 1px solid #555;
 }
 
+.validated-product {
+  background-color: $green-primary;
+}
+
 /* VALIDATIONS BUTTONS */
+.hide {
+  display: none;
+}
+.quantity-warning {
+  color: rgb(255, 173, 79);
+  font-size: 0.9rem;
+  padding: 0px 15px;
+
+  // box-shadow: 5px 0px 0 2px  rgb(255, 173, 79);
+
+  transition: transform 0.5s;
+  &:not(.hide) {
+    transform: scale(1.2);
+  }
+}
 
 .validation-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.validation-buttons {
   display: flex;
   justify-content: space-between;
 
