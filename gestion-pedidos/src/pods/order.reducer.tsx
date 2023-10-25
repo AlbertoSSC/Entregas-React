@@ -1,5 +1,5 @@
-import { productStock } from "./Product-MockStock";
-import { ProductState, mappedMockProducts } from "./Product.mapper";
+import { productStock } from "../common/data-Mock";
+import { ProductState, mappedMockProducts } from "../common";
 
 export const initialState: ProductState[] = mappedMockProducts(productStock);
 

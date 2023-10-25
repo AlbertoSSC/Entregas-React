@@ -1,5 +1,10 @@
-$blue-primary: rgb(81, 145, 255);
-$green-primary: rgba(101, 194, 128, 0.812);
+$blue-primary: #5191ff;
+$green-primary: #65c280cf;
+$yellow-primary: #ffad4f;
+
+body{
+  margin: 2rem;
+}
 
 /*HEAD ORDER*/
 .head-container {
@@ -84,11 +89,15 @@ h3 {
   margin-top: 3rem;
   text-align: center;
 }
+h4 {
+  text-align: right;
+  margin-right: 0.5rem;
+}
 table {
   border-collapse: collapse;
   border-spacing: 2rem 1.5rem;
-  width: 80vw;
-  margin: auto;
+  width: 100%;
+  margin: 0;
 }
 
 thead {
@@ -96,17 +105,21 @@ thead {
 }
 
 th {
+  color: white;
+  font-weight: 500;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   text-align: center;
+  padding: 0.2rem;
 }
 td {
   text-align: center;
   padding: 0.5rem;
+  text-align-last:center
 }
 
-#checkbox-input{
-  transform: scale(2)
+#checkbox-input {
+  transform: scale(2);
 }
 
 .productId {
@@ -131,7 +144,7 @@ td {
   box-shadow: 10px 5px 0 1px $green-primary;
 }
 .quantityZero {
-  box-shadow: 10px 5px 0 1px rgb(255, 173, 79);
+  box-shadow: 10px 5px 0 1px $yellow-primary;
 }
 
 .price-cell {

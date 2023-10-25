@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Button } from "@mui/material";
-import { Action, ProductState } from "@/common";
+import { Action, ProductState, emptyAllCheckboxes } from "@/common";
 
 interface Props {
   productsReduced: ProductState[];
@@ -12,30 +12,17 @@ export const ValidationButtons: React.FC<Props> = (props) => {
   const [isEnableValidation, setIsEnableValidation] = React.useState(true);
 
   React.useEffect(() => {
-    const isSomeChecked = props.productsReduced.some((p: ProductState) => {
-      return p.isChecked;
-    });
+    const isSomeChecked = props.productsReduced.some((p) => p.isChecked);
     setIsEnableValidation(!isSomeChecked);
 
-    const isQuantityZero = () => {
-      props.productsReduced.map((p) => {
-        if (p.state === "Validado" && p.quantity === 0) {
-          p.state = "Pendiente";
-
-          const tr = document.getElementById(`product-row-${p.id}`);
-          if (tr) tr.classList.remove("validated-product");
-        }
-      });
-    };
-    isQuantityZero();
   }, [props.productsReduced]);
 
   const handleIsValidated = () => {
     const quantityWarning = document.getElementById("quantity-warning");
 
-    props.productsReduced.map((p) => {
-      const tr = document.getElementById(`product-row-${p.id}`);
+    props.productsReduced.forEach((p) => {
       const quantityInput = document.getElementById(`productQuantity-${p.id}`);
+      const tr = document.getElementById(`product-row-${p.id}`);
 
       if (p.isChecked && p.quantity > 0) {
         props.dispatch({
@@ -52,19 +39,17 @@ export const ValidationButtons: React.FC<Props> = (props) => {
       }
     });
 
-    props.productsReduced.some((p) => p.quantity === 0)
-      ? quantityWarning?.classList.remove("hide")
-      : quantityWarning?.classList.add("hide");
+    const elementeQuantityZero =
+      document.getElementsByClassName("quantityZero");
+    elementeQuantityZero.length === 0
+      ? quantityWarning?.classList.add("hide")
+      : quantityWarning?.classList.remove("hide");
 
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach((checkbox) => {
-      const inputElement = checkbox as HTMLInputElement;
-      inputElement.checked = false;
-    });
+    emptyAllCheckboxes();
   };
 
   const handleIsWaiting = () => {
-    props.productsReduced.map((p) => {
+    props.productsReduced.forEach((p) => {
       if (p.isChecked) {
         props.dispatch({
           type: "SET_STATE",
@@ -75,14 +60,9 @@ export const ValidationButtons: React.FC<Props> = (props) => {
         const tr = document.getElementById(`product-row-${p.id}`);
         if (tr) tr.classList.remove("validated-product");
       }
-      return p;
     });
 
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach((checkbox) => {
-      const inputElement = checkbox as HTMLInputElement;
-      inputElement.checked = false;
-    });
+    emptyAllCheckboxes();
   };
 
   return (

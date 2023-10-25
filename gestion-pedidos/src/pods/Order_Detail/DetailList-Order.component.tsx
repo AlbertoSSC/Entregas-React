@@ -5,16 +5,16 @@ import { Divider } from "@mui/material";
 import {
   initialState,
   productReducer,
-  Product,
-  TotalPriceContext,
   Action,
   ProductInfoContext,
-} from "@/common";
-import { ValidationButtons } from "@/pods";
+  TotalPriceContext,
+  ValidationButtons,
+} from "@/pods";
+import { Product } from "@/common";
 
-const iva = 0.21;
+export const DetailListComponent: React.FC = () => {
+  const IVA = 0.21;
 
-export const PedidoDetail: React.FC = () => {
   const [productsReduced, dispatch] = React.useReducer(
     productReducer,
     initialState
@@ -31,23 +31,30 @@ export const PedidoDetail: React.FC = () => {
   const [subtotalPrice, setSubotalPrice] = React.useState(0.0);
 
   React.useEffect(() => {
-    const totalPrice = productsReduced.reduce(
+    const total = productsReduced.reduce(
       (total, p) => total + p.price * (p.quantity || 0),
       0
     );
-    setSubotalPrice(totalPrice);
-    setTotalPrice(totalPrice + totalPrice * iva);
+    setSubotalPrice(total);
+    setTotalPrice(total + total * IVA);
 
-    const setProduct = productsReduced;
-    setProductInfo(setProduct);
+    setProductInfo(productsReduced);
 
-    productsReduced.map((p) => {
+    productsReduced.forEach((p) => {
       const inputQuantity = document.getElementById(`productQuantity-${p.id}`);
+
       p.quantity > 0
         ? inputQuantity?.classList.add("quantityOn")
         : inputQuantity?.classList.remove("quantityOn");
+
+      if (p.state === "Validado" && p.quantity === 0) {
+        p.state = "Pendiente";
+
+        const tr = document.getElementById(`product-row-${p.id}`);
+        if (tr) tr.classList.remove("validated-product");
+      }
     });
-  }, [productsReduced]);
+  }, [productsReduced, setProductInfo, setTotalPrice]);
 
   const setNewQuantity = (productId: number, newQuantity: number) => {
     dispatch({
@@ -91,7 +98,7 @@ export const PedidoDetail: React.FC = () => {
       />
 
       <table>
-        <thead>
+        <thead className="table-header">
           <tr>
             <th>Selección</th>
             <th>Estado</th>
@@ -103,8 +110,6 @@ export const PedidoDetail: React.FC = () => {
         </thead>
 
         <tbody>
-          {/* mapper START*/}
-
           {productsReduced.map((product) => (
             <React.Fragment key={product.id}>
               <tr id={`product-row-${product.id}`} className="">
@@ -127,6 +132,7 @@ export const PedidoDetail: React.FC = () => {
                   <span>En stock: {product.stock} </span>
                   <input
                     min={0}
+                    max={product.stock}
                     type="number"
                     name="productQuantity"
                     className=""
@@ -195,8 +201,6 @@ export const PedidoDetail: React.FC = () => {
               </tr>
             </React.Fragment>
           ))}
-
-          {/* mapper END */}
         </tbody>
 
         <tfoot>
@@ -209,7 +213,7 @@ export const PedidoDetail: React.FC = () => {
           <tr>
             <td colSpan={5}></td>
             <td className="subtotal-cell">
-              IVA: {(parseFloat(subtotalPrice.toFixed(2)) * iva).toFixed(2)} €
+              IVA: {(parseFloat(subtotalPrice.toFixed(2)) * IVA).toFixed(2)} €
             </td>
           </tr>
         </tfoot>

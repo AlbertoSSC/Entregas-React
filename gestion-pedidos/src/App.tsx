@@ -1,14 +1,17 @@
 import "./App.scss";
 
-import { TotalPriceProvider, ProductInfoProvider } from "@/common";
-import { PedidoContainer } from "@/pods";
+import {
+  ProductInfoProvider,
+  TotalPriceProvider,
+  OrderContainer,
+} from "@/pods";
 
 function App() {
   return (
     <>
       <TotalPriceProvider>
         <ProductInfoProvider>
-          <PedidoContainer />
+          <OrderContainer />
         </ProductInfoProvider>
       </TotalPriceProvider>
     </>

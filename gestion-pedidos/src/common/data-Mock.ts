@@ -15,3 +15,10 @@ export const productStock: Product[] = [
   // { id: 7, name: "Producto número 7", price: 350, stock: 6 },
   // { id: 8, name: "Producto número 8", price: 400, stock: 25 },
 ];
+
+const formatedDate = new Date().toISOString().split("T")[0];
+export const clientInfo = {
+  orderNumber: "orNum1235Fd554-34es",
+  clientName: "Organization & Co",
+  orderDate: formatedDate,
+};

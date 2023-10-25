@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductState } from ".";
+import { ProductState } from "../common";
 
 interface Props {
   children: React.ReactNode;
