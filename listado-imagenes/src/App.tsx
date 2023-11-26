@@ -5,7 +5,7 @@ import React from "react";
 import { AppRouter } from "./core";
 import { AnimalProvider, ToggleCartProvider } from "./common";
 
-export const App: React.FC = () => {
+function App() {
   return (
     <>
       <ToggleCartProvider>
@@ -15,4 +15,6 @@ export const App: React.FC = () => {
       </ToggleCartProvider>
     </>
   );
-};
+}
+
+export default App;

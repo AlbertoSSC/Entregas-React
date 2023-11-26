@@ -135,7 +135,7 @@ export const RmListContainer: React.FC = () => {
         currentSearch={currentSearch}
       />
       <ItemsListSlicedContext.Provider value={itemsListSliced}>
-        {!itemsListSliced.length ? (
+        {itemsListSliced.length === 0 ? (
           <>
             {alignment === "character" ? (
               <h3>Cargando 826 personajes...</h3>

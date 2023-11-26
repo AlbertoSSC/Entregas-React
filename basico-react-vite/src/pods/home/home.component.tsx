@@ -9,7 +9,6 @@ export const HomePageContent: React.FC = () => {
   return (
     <>
       <div className="home-header-content">
-        <span className="header-home-title">Bienvenido a la entrega de:</span>
         <img className="react-home-img" src={ReactLogo} alt="react logo" />
         <span className="text-home-p">
           Seleccione donde desee iniciar su búsqueda

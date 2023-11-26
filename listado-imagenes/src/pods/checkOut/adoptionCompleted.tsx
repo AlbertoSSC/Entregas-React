@@ -7,6 +7,8 @@ import { routes } from "@/core";
 import { AnimalContext, theme } from "@/common";
 import { toggleAdoptCat, toggleAdoptDog } from "@/pods";
 
+import basketPet from "@/assets/images/dogs-in-basket.jpg";
+
 export const AdoptionCompletedComponent: React.FC = () => {
   const { selectedCats, setSelectedCats, selectedDogs, setSelectedDogs } =
     React.useContext(AnimalContext);
@@ -30,10 +32,9 @@ export const AdoptionCompletedComponent: React.FC = () => {
       <Divider sx={{ width: "100%" }} />
 
       <h1>Gracias por darle un nuevo hogar a tu nuevo amiguit@</h1>
-      <img
-        src="src/assets/images/dogs-in-basket.jpg"
-        alt="dog in basket image"
-      />
+
+      <img src={basketPet} alt="dog in basket image" />
+
       <ThemeProvider theme={theme}>
         <Button
           variant="contained"

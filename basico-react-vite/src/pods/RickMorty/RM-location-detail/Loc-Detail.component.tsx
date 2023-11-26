@@ -40,7 +40,7 @@ export const LocDetailComponent: React.FC<Props> = (props) => {
         </span>
 
         {!residentData || residentData.length === 0 ? (
-          <span className="text-grey-span">No hay residentes</span>
+          <span className="text-grey-span">---</span>
         ) : (
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>

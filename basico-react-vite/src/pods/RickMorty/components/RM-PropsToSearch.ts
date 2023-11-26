@@ -9,7 +9,10 @@ import {
 } from "@/pods";
 
 interface CharacterSearch
-  extends Omit<CharDetailVM, "id" | "origin.url" | "Location.url" | "image" | "episode"> {}
+  extends Omit<
+    CharDetailVM,
+    "id" | "origin.url" | "Location.url" | "image" | "episode"
+  > {}
 interface LocationSearch extends Omit<LocationVM, "id" | "residents"> {}
 interface EpisodeSearch extends Omit<EpisodeVM, "id" | "characters"> {}
 
