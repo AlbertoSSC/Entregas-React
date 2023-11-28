@@ -1,11 +1,12 @@
 import React from "react";
 
-import { routes } from "@/core";
 import { Link as RouterLink } from "react-router-dom";
-import { AnimalContext, ToggleCartContext, theme } from "@/common";
-import { NavTwoColumnsLayout } from ".";
 
 import { Button, ThemeProvider } from "@mui/material";
+
+import { AnimalContext, ToggleCartContext, theme } from "@/common";
+import { routes } from "@/core";
+import { NavTwoColumnsLayout } from ".";
 
 interface Props extends React.PropsWithChildren {}
 
@@ -81,10 +82,8 @@ export const NavBar: React.FC<Props> = ({ children }) => {
           <div id="nav-cart" className="nav-cart">
             <div id="text" className="text empty-hide-cart">
               <div>
-                <span className="title-cart">Cesta de adopción</span>
-                <span className="filled-cart">
-                  Tienes algún amiguito en la cesta 🐶🐱
-                </span>
+                <span className="title-cart"></span>
+                <span className="filled-cart"></span>
               </div>
             </div>
             <div className="cart-button-container">

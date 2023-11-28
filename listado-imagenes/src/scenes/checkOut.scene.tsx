@@ -1,14 +1,14 @@
-import { Cart, NavBar, NavTwoColumnsLayout } from "@/layout";
+import { Cart, MainTwoColumnsLayout, NavBar } from "@/layout";
 import { CheckOutContainer } from "@/pods";
 
 export const CheckOutScene = () => {
   return (
     <>
       <NavBar />
-      <NavTwoColumnsLayout>
+      <MainTwoColumnsLayout>
         <Cart />
         <CheckOutContainer />
-      </NavTwoColumnsLayout>
+      </MainTwoColumnsLayout>
     </>
   );
 };

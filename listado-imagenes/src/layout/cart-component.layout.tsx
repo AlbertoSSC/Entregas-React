@@ -1,7 +1,9 @@
 import React from "react";
+
+import { Divider } from "@mui/material";
+
 import { AnimalContext } from "@/common";
 import { catMockInfo, dogMockInfo } from "@/pods";
-import { Divider } from "@mui/material";
 
 interface Props extends React.PropsWithChildren {}
 
@@ -27,9 +29,9 @@ export const Cart: React.FC<Props> = (props) => {
       <div id="cart" className="cart hide">
         {!selectedAnimals ||
         Object.values(selectedAnimals).every((animal) => !animal) ? (
-          <p style={{ color: "darkGrey" }}>
-            <i>Cesta de adopción vacía</i>
-          </p>
+          <i>
+            <p className="basket-text" style={{ color: "darkGrey" }}></p>
+          </i>
         ) : (
           Object.keys(selectedAnimals).map((selectAnimal) => {
             const selectedInfo =
@@ -56,7 +58,7 @@ export const Cart: React.FC<Props> = (props) => {
                         }}
                         aria-label="delete-button"
                       >
-                        Retirar de la cesta
+                        <span></span>
                       </button>
                     </div>
                     <p>{selectedInfo.title}</p>
