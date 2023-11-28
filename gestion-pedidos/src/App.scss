@@ -2,10 +2,33 @@ $blue-primary: #5191ff;
 $green-primary: #65c280cf;
 $yellow-primary: #ffad4f;
 
-body{
+body {
+  display: flex;
+  justify-content: center;
   margin: 2rem;
 }
 
+#root {
+  max-width: 1200px;
+
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.title-order {
+  @media (max-width: 960px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+  }
+}
 /*HEAD ORDER*/
 .head-container {
   background-color: #333;
@@ -18,6 +41,10 @@ body{
 .layout-head-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+
+  @media (max-width: 960px) {
+    grid-template-columns: none;
+  }
 }
 
 .inputs-head-container {
@@ -93,11 +120,16 @@ h4 {
   text-align: right;
   margin-right: 0.5rem;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 2rem 1.5rem;
   width: 100%;
   margin: 0;
+
+  @media (max-width: 960px) {
+    max-width: 400px;
+  }
 }
 
 thead {
@@ -115,7 +147,7 @@ th {
 td {
   text-align: center;
   padding: 0.5rem;
-  text-align-last:center
+  text-align-last: center;
 }
 
 #checkbox-input {

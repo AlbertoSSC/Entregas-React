@@ -61,7 +61,7 @@ export const SimpleDialog: React.FC<SimpleDialogProps> = (props) => {
             ))}
           </tbody>
         </table>
-        <h4>Total: {totalPrice}€</h4>
+        <h4>Total: {totalPrice.toFixed(2)}€</h4>
       </List>
       <Button variant="outlined" onClick={handleClose}>
         Cerrar

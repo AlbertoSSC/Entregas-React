@@ -1,7 +1,8 @@
 import React from "react";
 
 import { Button } from "@mui/material";
-import { Action, ProductState, emptyAllCheckboxes } from "@/common";
+import { ProductState, emptyAllCheckboxes } from "@/common";
+import { Action } from "..";
 
 interface Props {
   productsReduced: ProductState[];
